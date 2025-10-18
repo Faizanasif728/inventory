@@ -1,8 +1,8 @@
 # A full stack Inventory management system
 
-### Live Site: https://inventory-navy.vercel.app
+### Live Site: https://****************.vercel.app
 
-<!-- ### Backend Server: https://inventory-420.vercel.app -->
+<!-- ### Backend Server: https://********.vercel.app -->
 
 ### Technologies
 
