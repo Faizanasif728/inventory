@@ -32,8 +32,8 @@ const PurchaseManagementPage = () => {
     productName: purchase.productName,
     price: purchase.unitPrice,
     quantity: purchase.quantity,
-    totalPrice: purchase.totalPrice,
-    due: purchase.totalPrice - purchase.paid,
+    expense: purchase.expense,
+    due: purchase.expense - purchase.paid,
     date: formatDate(purchase.createdAt),
   }));
 
@@ -61,9 +61,9 @@ const PurchaseManagementPage = () => {
       align: 'center',
     },
     {
-      title: 'Total Price',
-      key: 'totalPrice',
-      dataIndex: 'totalPrice',
+      title: 'Expense',
+      key: 'expense',
+      dataIndex: 'expense',
       align: 'center',
     },
     {

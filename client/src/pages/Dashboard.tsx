@@ -3,11 +3,13 @@ import MonthlyChart from '../components/Charts/MonthlyChart';
 import Loader from '../components/Loader';
 import { useCountProductsQuery } from '../redux/features/management/productApi';
 import { useYearlySaleQuery } from '../redux/features/management/saleApi';
+import { useYearlyExpenseQuery } from '../redux/features/management/purchaseApi';
 import DailyChart from '../components/Charts/DailyChart';
 
 const Dashboard = () => {
   const { data: products, isLoading } = useCountProductsQuery(undefined);
   const { data: yearlyData, isLoading: isLoading1 } = useYearlySaleQuery(undefined);
+  const { data: yearlyExpense } = useYearlyExpenseQuery(undefined);
 
   if (isLoading && isLoading1) return <Loader />;
   else
@@ -43,6 +45,8 @@ const Dashboard = () => {
               </h1>
             </div>
           </Col>
+        </Row>
+        <Row style={{ paddingRight: '1rem' }}>
           <Col xs={{ span: 24 }} lg={{ span: 8 }} style={{ padding: '.5rem' }}>
             <div className='number-card'>
               <h3>Total Bill</h3>
@@ -50,6 +54,18 @@ const Dashboard = () => {
                 Rs.{' '}
                 {yearlyData?.data.reduce(
                   (acc: number, cur: { totalBill?: number }) => (acc += (cur.totalBill ?? 0)),
+                  0
+                )}
+              </h1>
+            </div>
+          </Col>
+          <Col xs={{ span: 24 }} lg={{ span: 8 }} style={{ padding: '.5rem' }}>
+            <div className='number-card'>
+              <h3>Total Expense</h3>
+              <h1>
+                Rs.{' '}
+                {yearlyExpense?.data?.reduce(
+                  (acc: number, cur: { totalExpense?: number }) => (acc += (cur.totalExpense ?? 0)),
                   0
                 )}
               </h1>

@@ -16,7 +16,7 @@ class PurchaseServices extends BaseServices<any> {
   async create(payload: IPurchase, userId: string) {
     const { unitPrice, quantity } = payload;
     payload.user = new Types.ObjectId(userId);
-    payload.totalPrice = unitPrice * quantity;
+    payload.expense = unitPrice * quantity;
 
     return this.model.create(payload);
   }
@@ -40,6 +40,20 @@ class PurchaseServices extends BaseServices<any> {
     const totalCount = await this.model.find({ user: userId }).countDocuments();
 
     return { data, totalCount };
+  }
+
+  async readAllYearly(userId: string) {
+    return await this.model.aggregate([
+      { $match: { user: new Types.ObjectId(userId), createdAt: { $exists: true, $ne: null } } },
+      {
+        $group: {
+          _id: { year: { $year: '$createdAt' } },
+          totalExpense: { $sum: '$expense' }
+        }
+      },
+      { $sort: { '_id.year': 1 } },
+      { $project: { year: '$_id.year', totalExpense: 1, _id: 0 } }
+    ]);
   }
 }
 

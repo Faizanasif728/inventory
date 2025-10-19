@@ -7,7 +7,7 @@ export interface IPurchase {
   productName: string
   quantity: number
   unitPrice: number
-  totalPrice: number
+  expense: number
   paid: number
   createdAt: string
 }

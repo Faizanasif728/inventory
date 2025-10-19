@@ -39,6 +39,18 @@ class PurchaseController {
     });
   });
 
+  // yearly expense
+  readAllYearly = asyncHandler(async (req, res) => {
+    const result = await this.services.readAllYearly(req.user._id);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: 'yearly expenses retrieved successfully',
+      data: result
+    });
+  });
+
   // update
   update = asyncHandler(async (req, res) => {
     const result = await this.services.update(req.params.id, req.body);

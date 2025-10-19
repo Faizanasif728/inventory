@@ -10,6 +10,7 @@ purchaseRoutes.use(verifyAuth);
 
 purchaseRoutes.post('/', validateRequest(purchaseValidator.createSchema), purchaseController.create);
 purchaseRoutes.get('/', purchaseController.getAll);
+purchaseRoutes.get('/years', purchaseController.readAllYearly);
 purchaseRoutes.delete('/:id', purchaseController.delete);
 purchaseRoutes.patch('/:id', validateRequest(purchaseValidator.updateSchema), purchaseController.create);
 
