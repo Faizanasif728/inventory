@@ -20,13 +20,22 @@ class BrandController {
 
   // read
   getAll = asyncHandler(async (req, res) => {
-    const result = await this.services.getAll(req.user._id);
+    const result = await this.services.getAll(req.query, req.user._id);
+
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 10;
 
     sendResponse(res, {
       success: true,
       statusCode: httpStatus.OK,
       message: 'Brand retrieved successfully!',
-      data: result
+      meta: {
+        page,
+        limit,
+        total: result?.totalCount[0]?.total || 0,
+        totalPage: Math.ceil((result?.totalCount[0]?.total || 0) / limit)
+      },
+      data: result.data
     });
   });
 

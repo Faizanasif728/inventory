@@ -45,12 +45,12 @@ const Sidebar = () => {
       <Drawer
           title={
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
-              <span style={{color: '#fff'}}>IMS</span>
+              <span style={{color: '#000'}}>IMS</span>
               <Button
                 type='text'
                 aria-label='Close menu'
                 onClick={closeDrawer}
-                icon={<CloseOutlined style={{color: '#fff', fontSize: 16}} />}
+                icon={<CloseOutlined style={{color: '#000', fontSize: 16}} />}
               />
             </div>
           }
@@ -58,18 +58,18 @@ const Sidebar = () => {
         open={isDrawerOpen}
         onClose={closeDrawer}
         width={240}
-        bodyStyle={{padding: 0, background: '#164863'}}
-        headerStyle={{background: '#164863'}}
+        bodyStyle={{padding: 0, background: '#fff'}}
+        headerStyle={{background: '#fff'}}
         maskClosable
         closable={false}
-        getContainer={false}
         mask={false}
       >
         <Menu
-          theme='dark'
+          theme='light'
           mode='inline'
-          style={{backgroundColor: '#164863', fontWeight: 700, borderRight: 0}}
-          defaultSelectedKeys={['Dashboard']}
+          className='app-sidebar-menu'
+          style={{backgroundColor: '#fff', fontWeight: 700, borderRight: 0}}
+          selectable={false}
           items={sidebarItems}
           onClick={closeDrawer}
         />
@@ -83,12 +83,13 @@ const Sidebar = () => {
           }}
         >
           <Button
-            type='primary'
+            type='text'
+            danger
+            className='logout-btn'
             style={{
               width: '100%',
-              backgroundColor: 'cyan',
-              color: '#000',
-              fontWeight: 600,
+              color: '#ff4d4f',
+              fontWeight: 700,
               textTransform: 'uppercase',
             }}
             onClick={handleLogout}

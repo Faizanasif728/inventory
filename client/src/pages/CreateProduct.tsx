@@ -1,5 +1,6 @@
 import { Button, Col, Flex, Row } from 'antd';
 import { FieldValues, useForm } from 'react-hook-form';
+import { useState } from 'react';
 import CustomInput from '../components/CustomInput';
 import toastMessage from '../lib/toastMessage';
 import { useGetAllBrandsQuery } from '../redux/features/management/brandApi';
@@ -8,11 +9,13 @@ import { useCreateNewProductMutation } from '../redux/features/management/produc
 import { useGetAllSellerQuery } from '../redux/features/management/sellerApi';
 import { ICategory } from '../types/product.types';
 import CreateSeller from '../components/product/CreateSeller';
-import CreateCategory from '../components/product/CreateCategory';
-import CreateBrand from '../components/product/CreateBrand';
+import CreateCategoryModal from '../components/modal/CreateCategoryModal';
+import CreateBrandModal from '../components/modal/CreateBrandModal';
 import { SpinnerIcon } from '@phosphor-icons/react';
 
 const CreateProduct = () => {
+  const [isCreateCategoryOpen, setIsCreateCategoryOpen] = useState(false);
+  const [isCreateBrandOpen, setIsCreateBrandOpen] = useState(false);
   const [createNewProduct, { isLoading: isCreatingProduct }] = useCreateNewProductMutation();
   const { data: categories } = useGetAllCategoriesQuery(undefined);
   const { data: sellers } = useGetAllSellerQuery(undefined);
@@ -205,8 +208,66 @@ const CreateProduct = () => {
             }}
           >
             <CreateSeller />
-            <CreateCategory />
-            <CreateBrand />
+            <Flex
+              vertical
+              style={{
+                padding: '1rem 2rem',
+                border: '1px solid #b6cbd7',
+                borderRadius: '.6rem',
+                marginBottom: '1rem',
+              }}
+            >
+              <h3
+                style={{
+                  textAlign: 'center',
+                  marginBottom: '.6rem',
+                  fontWeight: '900',
+                  textTransform: 'uppercase',
+                }}
+              >
+                Create New Category
+              </h3>
+              <Button
+                htmlType='button'
+                type='primary'
+                style={{ textTransform: 'uppercase', fontWeight: 'bold' }}
+                onClick={() => setIsCreateCategoryOpen(true)}
+              >
+                Create Category
+              </Button>
+            </Flex>
+            <CreateCategoryModal
+              openModal={isCreateCategoryOpen}
+              setOpenModal={setIsCreateCategoryOpen}
+            />
+            <Flex
+              vertical
+              style={{
+                padding: '1rem 2rem',
+                border: '1px solid #b6cbd7',
+                borderRadius: '.6rem',
+              }}
+            >
+              <h3
+                style={{
+                  textAlign: 'center',
+                  marginBottom: '.6rem',
+                  fontWeight: '900',
+                  textTransform: 'uppercase',
+                }}
+              >
+                Create New Brand
+              </h3>
+              <Button
+                htmlType='button'
+                type='primary'
+                style={{ textTransform: 'uppercase', fontWeight: 'bold' }}
+                onClick={() => setIsCreateBrandOpen(true)}
+              >
+                Create Brand
+              </Button>
+            </Flex>
+            <CreateBrandModal openModal={isCreateBrandOpen} setOpenModal={setIsCreateBrandOpen} />
           </Flex>
         </Col>
       </Row>

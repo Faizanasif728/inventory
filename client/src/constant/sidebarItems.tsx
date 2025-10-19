@@ -6,6 +6,8 @@ import {
   MoneyCollectFilled,
   ProfileFilled,
   UserOutlined,
+  AppstoreOutlined,
+  TagsOutlined,
 } from '@ant-design/icons';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
@@ -40,6 +42,16 @@ export const sidebarItems = [
     key: 'Manage Purchase',
     label: <NavLink to='/purchases'>MANAGE PURCHASES</NavLink>,
     icon: React.createElement(AimOutlined),
+  },
+  {
+    key: 'Manage Categories',
+    label: <NavLink to='/categories'>MANAGE CATEGORIES</NavLink>,
+    icon: React.createElement(AppstoreOutlined),
+  },
+  {
+    key: 'Manage Brands',
+    label: <NavLink to='/brands'>MANAGE BRANDS</NavLink>,
+    icon: React.createElement(TagsOutlined),
   },
   // {
   //   key: 'Sales History',

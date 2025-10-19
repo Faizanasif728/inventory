@@ -14,6 +14,8 @@ import SaleManagementPage from '../pages/managements/SaleManagementPage';
 import SellerManagementPage from '../pages/managements/SellerManagementPage';
 import ChangePasswordPage from '../pages/ChangePasswordPage';
 import EditProfilePage from '../pages/EditProfilePage';
+import CategoryManagementPage from '../pages/managements/CategoryManagementPage';
+import BrandManagementPage from '../pages/managements/BrandManagementPage';
 
 export const router = createBrowserRouter([
   {
@@ -73,6 +75,22 @@ export const router = createBrowserRouter([
         element: (
           <ProtectRoute>
             <PurchaseManagementPage />
+          </ProtectRoute>
+        ),
+      },
+      {
+        path: 'categories',
+        element: (
+          <ProtectRoute>
+            <CategoryManagementPage />
+          </ProtectRoute>
+        ),
+      },
+      {
+        path: 'brands',
+        element: (
+          <ProtectRoute>
+            <BrandManagementPage />
           </ProtectRoute>
         ),
       },

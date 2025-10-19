@@ -26,6 +26,50 @@ li.ant-menu-item {
   padding: 0 .8rem !important;
 }
 
+/* Sidebar menu - text-only look with subtle hover; no selected blue bg */
+/* Sidebar light theme: white background, black text, blue on hover */
+.app-sidebar-menu .ant-menu-item,
+.app-sidebar-menu .ant-menu-submenu-title {
+  background: transparent !important;
+}
+
+.app-sidebar-menu .ant-menu-item::after {
+  display: none !important; /* remove default active bar */
+}
+
+.app-sidebar-menu .ant-menu-item-selected,
+.app-sidebar-menu .ant-menu-item-active {
+  background: transparent !important;
+}
+
+.app-sidebar-menu .ant-menu-item:hover,
+.app-sidebar-menu .ant-menu-submenu-title:hover {
+  background: transparent !important; /* no bg on hover */
+}
+
+.app-sidebar-menu .ant-menu-item a,
+.app-sidebar-menu .ant-menu-title-content {
+  color: #000 !important; /* default black */
+  font-weight: 700;
+}
+
+.app-sidebar-menu .ant-menu-item:hover a,
+.app-sidebar-menu .ant-menu-submenu-title:hover .ant-menu-title-content {
+  color: #1677ff !important; /* AntD blue */
+}
+
+/* Logout as text-only, red icon/text, no bg on hover */
+.logout-btn {
+  background: transparent !important;
+}
+
+.logout-btn:hover,
+.logout-btn:active,
+.logout-btn:focus {
+  background: transparent !important;
+  color: #ff4d4f !important;
+}
+
 .label {
   font-size: 1.1rem;
   font-weight: 600;

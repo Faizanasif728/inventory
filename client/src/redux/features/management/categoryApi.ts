@@ -3,9 +3,10 @@ import { baseApi } from "../baseApi";
 const categoryApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllCategories: builder.query({
-      query: () => ({
+      query: (query) => ({
         url: '/categories',
-        method: 'GET'
+        method: 'GET',
+        params: query
       }),
       providesTags: ['category']
     }),
@@ -17,7 +18,14 @@ const categoryApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['category']
     }),
+    deleteCategory: builder.mutation({
+      query: (id) => ({
+        url: '/categories/' + id,
+        method: 'DELETE'
+      }),
+      invalidatesTags: ['category']
+    }),
   })
 })
 
-export const { useGetAllCategoriesQuery, useCreateCategoryMutation } = categoryApi
+export const { useGetAllCategoriesQuery, useCreateCategoryMutation, useDeleteCategoryMutation } = categoryApi

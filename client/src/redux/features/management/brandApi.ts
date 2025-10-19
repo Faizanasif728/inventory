@@ -3,9 +3,10 @@ import { baseApi } from "../baseApi";
 const brandApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllBrands: builder.query({
-      query: () => ({
+      query: (query) => ({
         url: '/brands',
-        method: 'GET'
+        method: 'GET',
+        params: query
       }),
       providesTags: ['brand']
     }),
@@ -17,7 +18,14 @@ const brandApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['brand']
     }),
+    deleteBrand: builder.mutation({
+      query: (id) => ({
+        url: '/brands/' + id,
+        method: 'DELETE'
+      }),
+      invalidatesTags: ['brand']
+    }),
   })
 })
 
-export const { useGetAllBrandsQuery, useCreateBrandMutation } = brandApi
+export const { useGetAllBrandsQuery, useCreateBrandMutation, useDeleteBrandMutation } = brandApi
