@@ -8,7 +8,7 @@ interface IData {
   week?: number;
   year: number;
   totalQuantity: number;
-  totalRevenue: number;
+  totalProfit?: number; // mapped in API layer
 }
 
 const columns: TableColumnsType<any> = [
@@ -24,9 +24,9 @@ const columns: TableColumnsType<any> = [
     align: 'center',
   },
   {
-    title: 'Total revenue',
-    key: 'totalRevenue',
-    dataIndex: 'totalRevenue',
+    title: 'Total Profit',
+    key: 'totalProfit',
+    dataIndex: 'totalProfit',
     align: 'right',
   },
 ];
@@ -36,7 +36,7 @@ const HistoryTable = ({ data, isFetching }: { data: { data: IData[] }; isFetchin
     key: row._id,
     date: generateDate({ year: row.year, week: row.week, month: row.month, day: row.day }),
     totalQuantity: row.totalQuantity,
-    totalRevenue: row.totalRevenue,
+    totalProfit: row.totalProfit ?? 0,
   }));
 
   return (

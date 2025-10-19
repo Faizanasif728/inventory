@@ -117,15 +117,17 @@ class SaleControllers {
    * update sale
    */
   update = asyncHandler(async (req, res) => {
-    const { price, quantity, ...restPayload } = req.body;
+    const { price, sellingPrice, quantity, ...restPayload } = req.body;
 
     const sale = await this.services.read(req.params.id, req.user._id);
 
-    const updatedPrice = price || sale.product.price;
+    const updatedProductPrice = price || sale.product.price;
+    const updatedSellingPrice = sellingPrice || sale.sellingPrice;
     const updatedQuantity = quantity || sale.quantity;
 
-    restPayload.totalPrice = updatedPrice * updatedQuantity;
+    restPayload.totalPrice = (updatedSellingPrice - updatedProductPrice) * updatedQuantity;
     restPayload.quantity = updatedQuantity;
+    restPayload.sellingPrice = updatedSellingPrice;
 
     const result = await this.services.update(req.params.id, restPayload);
 

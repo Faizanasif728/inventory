@@ -38,12 +38,28 @@ const saleApi = baseApi.injectEndpoints({
         url: `/sales/years`,
         method: 'GET'
       }),
+      transformResponse: (response: any) => ({
+        ...response,
+        data: response?.data?.map((item: any) => ({
+          ...item,
+          totalProfit: item?.totalProfit ?? 0,
+          totalBill: item?.totalBill ?? 0,
+        }))
+      }),
       providesTags: ['sale']
     }),
     monthlySale: builder.query({
       query: () => ({
         url: `/sales/months`,
         method: 'GET'
+      }),
+      transformResponse: (response: any) => ({
+        ...response,
+        data: response?.data?.map((item: any) => ({
+          ...item,
+          totalProfit: item?.totalProfit ?? 0,
+          totalBill: item?.totalBill ?? 0,
+        }))
       }),
       providesTags: ['sale']
     }),
@@ -52,12 +68,28 @@ const saleApi = baseApi.injectEndpoints({
         url: `/sales/weeks`,
         method: 'GET'
       }),
+      transformResponse: (response: any) => ({
+        ...response,
+        data: response?.data?.map((item: any) => ({
+          ...item,
+          totalProfit: item?.totalProfit ?? 0,
+          totalBill: item?.totalBill ?? 0,
+        }))
+      }),
       providesTags: ['sale']
     }),
     dailySale: builder.query({
       query: () => ({
         url: `/sales/days`,
         method: 'GET'
+      }),
+      transformResponse: (response: any) => ({
+        ...response,
+        data: response?.data?.map((item: any) => ({
+          ...item,
+          totalProfit: item?.totalProfit ?? 0,
+          totalBill: item?.totalBill ?? 0,
+        }))
       }),
       providesTags: ['sale']
     }),

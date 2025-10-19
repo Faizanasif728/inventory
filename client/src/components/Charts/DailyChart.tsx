@@ -27,11 +27,11 @@ export default function DailyChart() {
       day: number;
       month: number;
       year: number;
-      totalRevenue: number;
+      totalProfit?: number; // mapped in API layer
       totalQuantity: number;
     }) => ({
       name: `${item.day} ${months[item.month - 1]}, ${item.year}`,
-      revenue: item.totalRevenue,
+      profit: item.totalProfit ?? 0,
       quantity: item.totalQuantity,
     })
   );
@@ -53,7 +53,7 @@ export default function DailyChart() {
         <XAxis dataKey='name' />
         <YAxis />
         <Tooltip />
-        <Area type='monotone' dataKey='revenue' stroke='#8884d8' fill='#164863' />
+        <Area name='Profit' type='monotone' dataKey='profit' stroke='#8884d8' fill='#164863' />
         <Area type='monotone' dataKey='quantity' stroke='#8884d8' fill='#164863' />
       </AreaChart>
     </ResponsiveContainer>

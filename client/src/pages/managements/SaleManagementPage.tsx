@@ -31,6 +31,8 @@ const SaleManagementPage = () => {
     quantity: sale.quantity,
     totalPrice: sale.totalPrice,
     date: formatDate(sale.date),
+    sellingPrice: sale.sellingPrice,
+    totalBill: (sale.sellingPrice || 0) * (sale.quantity || 0),
   }));
 
   const columns: TableColumnsType<any> = [
@@ -46,6 +48,12 @@ const SaleManagementPage = () => {
       align: 'center',
     },
     {
+      title: 'Selling Price',
+      key: 'sellingPrice',
+      dataIndex: 'sellingPrice',
+      align: 'center',
+    },
+    {
       title: 'Buyer Name',
       key: 'buyerName',
       dataIndex: 'buyerName',
@@ -58,7 +66,13 @@ const SaleManagementPage = () => {
       align: 'center',
     },
     {
-      title: 'Total Price',
+      title: 'Total Bill',
+      key: 'totalBill',
+      dataIndex: 'totalBill',
+      align: 'center',
+    },
+    {
+      title: 'Profit',
       key: 'totalPrice',
       dataIndex: 'totalPrice',
       align: 'center',

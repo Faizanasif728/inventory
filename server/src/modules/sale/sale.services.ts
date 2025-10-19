@@ -16,9 +16,10 @@ class SaleServices extends BaseServices<any> {
    * Create new sale and decrease product stock
    */
   async create(payload: any, userId: string) {
-    const { productPrice, quantity } = payload;
+    const { productPrice, sellingPrice, quantity } = payload;
     payload.user = userId;
-    payload.totalPrice = productPrice * quantity;
+    // Store profit/margin per sale as totalPrice
+    payload.totalPrice = (sellingPrice - productPrice) * quantity;
     const product = await Product.findById(payload.product);
 
     if (quantity > product!.stock) {
@@ -97,7 +98,8 @@ class SaleServices extends BaseServices<any> {
             year: { $isoWeekYear: '$date' }
           },
           totalQuantity: { $sum: '$quantity' },
-          totalRevenue: { $sum: '$totalPrice' }
+          totalProfit: { $sum: '$totalPrice' },
+          totalBill: { $sum: { $multiply: ['$sellingPrice', '$quantity'] } }
         }
       },
       {
@@ -111,7 +113,8 @@ class SaleServices extends BaseServices<any> {
           week: '$_id.week',
           year: '$_id.year',
           totalQuantity: 1,
-          totalRevenue: 1,
+          totalProfit: 1,
+          totalBill: 1,
           _id: 0
         }
       }
@@ -132,7 +135,8 @@ class SaleServices extends BaseServices<any> {
             year: { $year: '$date' }
           },
           totalQuantity: { $sum: '$quantity' },
-          totalRevenue: { $sum: '$totalPrice' }
+          totalProfit: { $sum: '$totalPrice' },
+          totalBill: { $sum: { $multiply: ['$sellingPrice', '$quantity'] } }
         }
       },
       {
@@ -144,7 +148,8 @@ class SaleServices extends BaseServices<any> {
         $project: {
           year: '$_id.year',
           totalQuantity: 1,
-          totalRevenue: 1,
+          totalProfit: 1,
+          totalBill: 1,
           _id: 0
         }
       }
@@ -167,7 +172,8 @@ class SaleServices extends BaseServices<any> {
             year: { $year: '$date' }
           },
           totalQuantity: { $sum: '$quantity' },
-          totalRevenue: { $sum: '$totalPrice' }
+          totalProfit: { $sum: '$totalPrice' },
+          totalBill: { $sum: { $multiply: ['$sellingPrice', '$quantity'] } }
         }
       },
       {
@@ -183,7 +189,8 @@ class SaleServices extends BaseServices<any> {
           month: '$_id.month',
           year: '$_id.year',
           totalQuantity: 1,
-          totalRevenue: 1,
+          totalProfit: 1,
+          totalBill: 1,
           _id: 0
         }
       }
@@ -205,7 +212,8 @@ class SaleServices extends BaseServices<any> {
             year: { $year: '$date' }
           },
           totalQuantity: { $sum: '$quantity' },
-          totalRevenue: { $sum: '$totalPrice' }
+          totalProfit: { $sum: '$totalPrice' },
+          totalBill: { $sum: { $multiply: ['$sellingPrice', '$quantity'] } }
         }
       },
       {
@@ -219,7 +227,8 @@ class SaleServices extends BaseServices<any> {
           month: '$_id.month',
           year: '$_id.year',
           totalQuantity: 1,
-          totalRevenue: 1,
+          totalProfit: 1,
+          totalBill: 1,
           _id: 0
         }
       }

@@ -24,9 +24,9 @@ const MonthlyChart = () => {
     );
 
   const data = monthlyData?.data.map(
-    (item: { month: number; year: number; totalRevenue: number }) => ({
+    (item: { month: number; year: number; totalProfit?: number }) => ({
       name: `${months[item.month - 1]}, ${item.year}`,
-      revenue: item.totalRevenue,
+      profit: item.totalProfit ?? 0,
     })
   );
 
@@ -38,7 +38,7 @@ const MonthlyChart = () => {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey='revenue' fill='#164863' />
+        <Bar name='Profit' dataKey='profit' fill='#164863' />
       </BarChart>
     </ResponsiveContainer>
   );

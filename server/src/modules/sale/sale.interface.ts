@@ -5,6 +5,7 @@ export interface ISale {
   product: Types.ObjectId;
   productName: string;
   productPrice: number;
+  sellingPrice: number;
   quantity: number;
   buyerName: string;
   date: Date;

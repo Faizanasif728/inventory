@@ -4,6 +4,7 @@ export interface ISale {
   buyerName: string;
   date: string;
   price: number
+  sellingPrice: number
 }
 
 export interface ITableSale {
@@ -14,6 +15,7 @@ export interface ITableSale {
     price: number;
   }
   productPrice: number;
+  sellingPrice?: number;
   productName: string;
   quantity: number;
   buyerName: string;

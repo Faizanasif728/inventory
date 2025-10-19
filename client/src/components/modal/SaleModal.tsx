@@ -11,7 +11,7 @@ const SaleModal = () => {
   const data = useAppSelector(getSaleModalData);
   const [createNewSale] = useCreateSaleMutation();
   const dispatch = useAppDispatch();
-  const [updateDate, setUpdateDate] = useState({ buyerName: '', quantity: '', date: '' });
+  const [updateDate, setUpdateDate] = useState({ buyerName: '', quantity: '', date: '', sellingPrice: '' });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setUpdateDate((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -24,6 +24,7 @@ const SaleModal = () => {
       price: data?.price as number,
       productName: data?.name,
       productPrice: data?.price,
+      sellingPrice: Number(updateDate?.sellingPrice),
       quantity: Number(updateDate?.quantity),
     };
 
@@ -33,7 +34,7 @@ const SaleModal = () => {
       if (res.statusCode === 201) {
         toastMessage({ icon: 'success', text: res.message });
         dispatch(toggleSaleModel({ open: false, data: null }));
-        setUpdateDate({ buyerName: '', quantity: '', date: '' });
+        setUpdateDate({ buyerName: '', quantity: '', date: '', sellingPrice: '' });
       }
     } catch (error: any) {
       toastMessage({ icon: 'error', text: error.data.message });
@@ -67,6 +68,13 @@ const SaleModal = () => {
             type='number'
             name='quantity'
             defaultValue={updateDate?.quantity}
+          />
+          <ModalInput
+            handleChange={handleChange}
+            label='Selling Price'
+            type='number'
+            name='sellingPrice'
+            defaultValue={updateDate?.sellingPrice}
           />
           <ModalInput
             handleChange={handleChange}

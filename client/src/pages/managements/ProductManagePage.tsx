@@ -139,7 +139,10 @@ const SellProductModal = ({ product }: { product: IProduct & { key: string } }) 
     const payload = {
       product: product.key,
       productName: product.name,
-      productPrice: product.price,
+      // Product cost price from catalog
+      productPrice: Number(product.price),
+      // Selling price entered by user
+      sellingPrice: Number(data.sellingPrice),
       quantity: Number(data.quantity),
       buyerName: data.buyerName,
       date: data.date,
@@ -177,6 +180,26 @@ const SellProductModal = ({ product }: { product: IProduct & { key: string } }) 
       </Button>
       <Modal title='Sell Product' open={isModalOpen} onCancel={handleCancel} footer={null}>
         <form onSubmit={handleSubmit(onSubmit)} style={{ marginTop: '1rem' }}>
+          <CustomInput
+            name='price'
+            label='Price'
+            errors={errors}
+            register={register}
+            type='number'
+            required={false}
+            readOnly={true}
+            // The price user entered while creating the product
+            // is shown as read-only here
+            defaultValue={product.price}
+          />
+          <CustomInput
+            name='sellingPrice'
+            label='Selling Price'
+            errors={errors}
+            register={register}
+            type='number'
+            required={true}
+          />
           <CustomInput
             name='buyerName'
             label='Buyer Name'

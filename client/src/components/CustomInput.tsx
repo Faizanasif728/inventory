@@ -8,6 +8,7 @@ interface Props {
   register: any;
   required?: boolean;
   defaultValue?: any;
+  readOnly?: boolean;
 }
 
 const CustomInput = ({
@@ -17,6 +18,8 @@ const CustomInput = ({
   label,
   register,
   type = 'text',
+  defaultValue,
+  readOnly = false,
 }: Props) => {
   return (
     <Row>
@@ -30,7 +33,9 @@ const CustomInput = ({
           id={name}
           type={type}
           placeholder={label}
+          defaultValue={defaultValue}
           {...register(name, { required: required })}
+          readOnly={readOnly}
           className={`input-field ${errors[name] ? 'input-field-error' : ''}`}
         />
       </Col>
