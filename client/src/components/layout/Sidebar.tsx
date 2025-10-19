@@ -1,90 +1,97 @@
 import {useState} from 'react';
 import {Outlet, useNavigate} from 'react-router-dom';
-import {Button, Layout, Menu} from 'antd';
-import {LogoutOutlined} from '@ant-design/icons';
+import {Button, Drawer, Layout, Menu, Typography} from 'antd';
+import {LogoutOutlined, MenuOutlined} from '@ant-design/icons';
 import {sidebarItems} from '../../constant/sidebarItems';
 import {useAppDispatch} from '../../redux/hooks';
 import {logoutUser} from '../../redux/services/authSlice';
 
-const {Content, Sider} = Layout;
+const {Header, Content} = Layout;
+const {Title} = Typography;
 
 const Sidebar = () => {
-  const [showLogoutBtn, setShowLogoutBtn] = useState(true);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleLogout = () => {
     dispatch(logoutUser());
     navigate('/');
   };
 
+  const closeDrawer = () => setIsDrawerOpen(false);
+
   return (
-    <Layout style={{height: '100vh'}}>
-      <Sider
-        breakpoint='lg'
-        collapsedWidth='0'
-        onCollapse={(collapsed, type) => {
-          if (type === 'responsive') {
-            setShowLogoutBtn(!collapsed);
-          }
-          if (type === 'clickTrigger') {
-            setShowLogoutBtn(!collapsed);
-          }
-        }}
-        width='220px'
+    <Layout style={{height: '100vh', background: '#fff'}}>
+      <Header
         style={{
-          backgroundColor: '#164863',
-          position: 'relative',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '1rem',
+          background: '#164863',
         }}
       >
-        <div className='demo-logo-vertical'>
-          <h1 style={{color: '#fff', padding: '1rem', fontSize: '1.8rem', textAlign: 'center'}}>
-            WELCOME
-          </h1>
-        </div>
+        <Button
+          type='text'
+          aria-label='Open menu'
+          onClick={() => setIsDrawerOpen(true)}
+          icon={<MenuOutlined style={{color: '#fff', fontSize: 20}} />}
+        />
+        <Title level={4} style={{color: '#fff', margin: 0}}>
+          IMS
+        </Title>
+      </Header>
+
+      <Drawer
+        title={<span style={{color: '#fff'}}>IMS</span>}
+        placement='left'
+        open={isDrawerOpen}
+        onClose={closeDrawer}
+        width={240}
+        bodyStyle={{padding: 0, background: '#164863'}}
+        headerStyle={{background: '#164863'}}
+        maskClosable
+        getContainer={false}
+      >
         <Menu
           theme='dark'
           mode='inline'
-          style={{backgroundColor: '#164863', fontWeight: '700'}}
+          style={{backgroundColor: '#164863', fontWeight: 700, borderRight: 0}}
           defaultSelectedKeys={['Dashboard']}
           items={sidebarItems}
+          onClick={closeDrawer}
         />
-        {showLogoutBtn && (
-          <div
+        <div
+          style={{
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            bottom: 0,
+            padding: '1rem',
+          }}
+        >
+          <Button
+            type='primary'
             style={{
-              margin: 'auto',
-              position: 'absolute',
-              bottom: 0,
-              padding: '1rem',
-              display: 'flex',
               width: '100%',
-              justifyContent: 'center',
+              backgroundColor: 'cyan',
+              color: '#000',
+              fontWeight: 600,
+              textTransform: 'uppercase',
             }}
+            onClick={handleLogout}
           >
-            <Button
-              type='primary'
-              style={{
-                width: '100%',
-                backgroundColor: 'cyan',
-                color: '#000',
-                fontWeight: 600,
-                textTransform: 'uppercase',
-              }}
-              onClick={handleClick}
-            >
-              <LogoutOutlined />
-              Logout
-            </Button>
-          </div>
-        )}
-      </Sider>
+            <LogoutOutlined /> Logout
+          </Button>
+        </div>
+      </Drawer>
+
       <Layout>
-        <Content style={{padding: '2rem', background: '#BBE1FA'}}>
+        <Content style={{padding: '1rem', background: '#fff'}}>
           <div
             style={{
               padding: '1rem',
-              maxHeight: 'calc(100vh - 4rem)',
-              minHeight: 'calc(100vh - 4rem)',
+              minHeight: 'calc(100vh - 64px - 2rem)',
               background: '#fff',
               borderRadius: '1rem',
               overflow: 'auto',
