@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {Outlet, useNavigate} from 'react-router-dom';
 import {Button, Drawer, Layout, Menu, Typography} from 'antd';
-import {LogoutOutlined, MenuOutlined} from '@ant-design/icons';
+import {LogoutOutlined, MenuOutlined, CloseOutlined} from '@ant-design/icons';
 import {sidebarItems} from '../../constant/sidebarItems';
 import {useAppDispatch} from '../../redux/hooks';
 import {logoutUser} from '../../redux/services/authSlice';
@@ -43,7 +43,17 @@ const Sidebar = () => {
       </Header>
 
       <Drawer
-        title={<span style={{color: '#fff'}}>IMS</span>}
+          title={
+            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+              <span style={{color: '#fff'}}>IMS</span>
+              <Button
+                type='text'
+                aria-label='Close menu'
+                onClick={closeDrawer}
+                icon={<CloseOutlined style={{color: '#fff', fontSize: 16}} />}
+              />
+            </div>
+          }
         placement='left'
         open={isDrawerOpen}
         onClose={closeDrawer}
@@ -51,7 +61,9 @@ const Sidebar = () => {
         bodyStyle={{padding: 0, background: '#164863'}}
         headerStyle={{background: '#164863'}}
         maskClosable
+        closable={false}
         getContainer={false}
+        mask={false}
       >
         <Menu
           theme='dark'
