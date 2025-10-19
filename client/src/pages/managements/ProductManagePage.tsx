@@ -39,6 +39,7 @@ const ProductManagePage = () => {
     name: product.name,
     category: product.category,
     categoryName: product.category.name,
+    brandName: product.brand?.name,
     price: product.price,
     stock: product.stock,
     seller: product?.seller,
@@ -58,6 +59,12 @@ const ProductManagePage = () => {
       title: 'Category',
       key: 'categoryName',
       dataIndex: 'categoryName',
+      align: 'center',
+    },
+    {
+      title: 'Brand',
+      key: 'brandName',
+      dataIndex: 'brandName',
       align: 'center',
     },
     {
