@@ -51,6 +51,18 @@ class PurchaseController {
     });
   });
 
+  // total purchased quantity
+  totalQuantity = asyncHandler(async (req, res) => {
+    const result = await this.services.totalPurchasedQuantity(req.user._id);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: 'total purchased quantity retrieved successfully',
+      data: { totalQuantity: result }
+    });
+  });
+
   // update
   update = asyncHandler(async (req, res) => {
     const result = await this.services.update(req.params.id, req.body);

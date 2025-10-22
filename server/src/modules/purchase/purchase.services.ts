@@ -55,6 +55,18 @@ class PurchaseServices extends BaseServices<any> {
       { $project: { year: '$_id.year', totalExpense: 1, _id: 0 } }
     ]);
   }
+
+  /**
+   * Sum of all purchased quantities for the user
+   */
+  async totalPurchasedQuantity(userId: string) {
+    const result = await this.model.aggregate([
+      { $match: { user: new Types.ObjectId(userId) } },
+      { $group: { _id: null, totalQuantity: { $sum: '$quantity' } } },
+      { $project: { _id: 0, totalQuantity: 1 } }
+    ]);
+    return result?.[0]?.totalQuantity || 0;
+  }
 }
 
 const purchaseServices = new PurchaseServices(Purchase, 'Purchase');

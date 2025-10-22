@@ -29,7 +29,7 @@ const CreateCategoryModal = ({ openModal, setOpenModal }: CreateCategoryModalPro
   return (
     <>
       <Modal
-        title='Create New Category!'
+        title={<span style={{color:'#4F0341', fontWeight:900}}>Create New Category!</span>}
         centered
         open={openModal}
         onOk={() => setOpenModal(false)}
@@ -50,7 +50,7 @@ const CreateCategoryModal = ({ openModal, setOpenModal }: CreateCategoryModalPro
             placeholder='Category Name'
           />
           <Flex justify='center' style={{ margin: '1rem' }}>
-            <Button key='submit' type='primary' onClick={onSubmit} disabled={isLoading}>
+            <Button key='submit' type='primary' className='btn-primary-purple' onClick={onSubmit} disabled={isLoading}>
               {isLoading && <SpinnerIcon className='spin' weight='bold' />}
               Create Category
             </Button>

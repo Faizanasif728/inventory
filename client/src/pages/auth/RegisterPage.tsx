@@ -1,5 +1,5 @@
-import { SpinnerIcon } from '@phosphor-icons/react';
-import { Button, Flex } from 'antd';
+import { SpinnerIcon, Eye, EyeSlash } from '@phosphor-icons/react';
+import { Button, Flex, Row, Col } from 'antd';
 import { FieldValues, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import toastMessage from '../../lib/toastMessage';
@@ -7,11 +7,15 @@ import { useRegisterMutation } from '../../redux/features/authApi';
 import { useAppDispatch } from '../../redux/hooks';
 import { loginUser } from '../../redux/services/authSlice';
 import decodeToken from '../../utils/decodeToken';
+import registerBanner from '../../assets/iphone-image.png';
+import { useState } from 'react';
 
 const RegisterPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [userRegistration, { isLoading }] = useRegisterMutation();
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const {
     handleSubmit,
     register,
@@ -41,59 +45,109 @@ const RegisterPage = () => {
   };
 
   return (
-    <Flex justify='center' align='center' style={{ height: '100vh' }}>
-      <Flex
-        vertical
-        style={{
-          width: '400px',
-          padding: '3rem',
-          border: '1px solid #164863',
-          borderRadius: '.6rem',
-        }}
-      >
-        <h1 style={{ marginBottom: '.7rem', textAlign: 'center', textTransform: 'uppercase' }}>
-          Register
-        </h1>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <input
-            type='text'
-            {...register('name', { required: true })}
-            placeholder='Your Name*'
-            className={`input-field ${errors['name'] ? 'input-field-error' : ''}`}
-          />
-          <input
-            type='text'
-            {...register('email', { required: true })}
-            placeholder='Your Email*'
-            className={`input-field ${errors['email'] ? 'input-field-error' : ''}`}
-          />
-          <input
-            type='password'
-            placeholder='Your Password*'
-            {...register('password', { required: true })}
-            className={`input-field ${errors['password'] ? 'input-field-error' : ''}`}
-          />
-          <input
-            type='password'
-            placeholder='Confirm Password*'
-            {...register('confirmPassword', { required: true })}
-            className={`input-field ${errors['confirmPassword'] ? 'input-field-error' : ''}`}
-          />
-          <Flex justify='center'>
-            <Button
-              htmlType='submit'
-              type='primary'
-              style={{ textTransform: 'uppercase', fontWeight: 'bold', width: '100%' }}
-            >
-              {isLoading && <SpinnerIcon className='spin' weight='bold' />}
+    <Flex justify='center' align='center' className='auth-page' style={{ padding: 0 }}>
+      <Row gutter={[24, 24]} align='middle' justify='center' style={{ width: '100%', minHeight: 'calc(100vh - 80px)' }}>
+        <Col xs={{ span: 24 }} md={{ span: 12 }} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Flex
+            vertical
+            className='auth-card'
+            style={{
+              width: '420px',
+              padding: '2.5rem',
+            }}
+          >
+            <h1 className='auth-title'>
               Register
-            </Button>
+            </h1>
+            <p className='auth-subtext'>Create an account to manage inventory smarter.</p>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className='label-row'>
+                <label htmlFor='name' className='input-label'>Name:</label>
+              </div>
+              <input
+                type='text'
+                {...register('name', { required: true })}
+                placeholder='Enter your name here'
+                id='name'
+                className={`input-field ${errors['name'] ? 'input-field-error' : ''}`}
+              />
+              {errors['name'] && <span className='field-error'>Name is required</span>}
+              <div className='label-row'>
+                <label htmlFor='email' className='input-label'>Email:</label>
+              </div>
+              <input
+                type='text'
+                {...register('email', { required: true })}
+                placeholder='Enter your email here'
+                id='email'
+                className={`input-field ${errors['email'] ? 'input-field-error' : ''}`}
+              />
+              {errors['email'] && <span className='field-error'>Email is required</span>}
+              <div className='label-row'>
+                <label htmlFor='password' className='input-label'>Password:</label>
+              </div>
+              <div className='input-with-icon'>
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder='Enter your password here'
+                  {...register('password', { required: true })}
+                  id='password'
+                  className={`input-field ${errors['password'] ? 'input-field-error' : ''}`}
+                />
+                <button
+                  type='button'
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  className='icon-btn'
+                  onClick={() => setShowPassword((v) => !v)}
+                >
+                  {showPassword ? <EyeSlash size={20} weight='bold' /> : <Eye size={20} weight='bold' />}
+                </button>
+              </div>
+              {errors['password'] && <span className='field-error'>Password is required</span>}
+              <div className='label-row'>
+                <label htmlFor='confirmPassword' className='input-label'>Confirm Password:</label>
+              </div>
+              <div className='input-with-icon'>
+                <input
+                  type={showConfirmPassword ? 'text' : 'password'}
+                  placeholder='Enter your confirm password here'
+                  {...register('confirmPassword', { required: true })}
+                  id='confirmPassword'
+                  className={`input-field ${errors['confirmPassword'] ? 'input-field-error' : ''}`}
+                />
+                <button
+                  type='button'
+                  aria-label={showConfirmPassword ? 'Hide confirm password' : 'Show confirm password'}
+                  className='icon-btn'
+                  onClick={() => setShowConfirmPassword((v) => !v)}
+                >
+                  {showConfirmPassword ? <EyeSlash size={20} weight='bold' /> : <Eye size={20} weight='bold' />}
+                </button>
+              </div>
+              {errors['confirmPassword'] && (
+                <span className='field-error'>Confirm Password is required</span>
+              )}
+              <p className='auth-inline-note'>
+                Already have an account? <Link className='muted-link' to='/login'>Login Here</Link>
+              </p>
+              <Flex justify='center'>
+                <Button
+                  htmlType='submit'
+                  type='primary'
+                  className='btn-primary-purple'
+                  style={{ textTransform: 'uppercase', fontWeight: 'bold', width: '100%' }}
+                >
+                  {isLoading && <SpinnerIcon className='spin' weight='bold' />}
+                  Register
+                </Button>
+              </Flex>
+            </form>
           </Flex>
-        </form>
-        <p style={{ marginTop: '1rem' }}>
-          Already have an account? <Link to='/login'>Login Here</Link>
-        </p>
-      </Flex>
+        </Col>
+        <Col xs={{ span: 24 }} md={{ span: 12 }} style={{ padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <img src={registerBanner} alt='Register' style={{ width: '100%', maxWidth: 450, height: 'auto', objectFit: 'contain' }} />
+        </Col>
+      </Row>
     </Flex>
   );
 };

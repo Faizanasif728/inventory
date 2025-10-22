@@ -3,6 +3,7 @@ import ProtectRoute from '../components/layout/ProtectRoute';
 import Sidebar from '../components/layout/Sidebar';
 import CreateProduct from '../pages/CreateProduct';
 import Dashboard from '../pages/Dashboard';
+import Home from '../pages/Home';
 import NotFound from '../pages/NotFound';
 import ProfilePage from '../pages/ProfilePage';
 import SaleHistoryPage from '../pages/SaleHistoryPage';
@@ -24,6 +25,14 @@ export const router = createBrowserRouter([
     children: [
       {
         path: '/',
+        element: (
+          <ProtectRoute>
+            <Home />
+          </ProtectRoute>
+        ),
+      },
+      {
+        path: 'dashboard',
         element: (
           <ProtectRoute>
             <Dashboard />

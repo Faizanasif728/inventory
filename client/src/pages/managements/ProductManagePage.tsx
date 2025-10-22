@@ -74,7 +74,7 @@ const ProductManagePage = () => {
       align: 'center',
     },
     {
-      title: 'stock',
+      title: 'Stock left',
       key: 'stock',
       dataIndex: 'stock',
       align: 'center',
@@ -116,9 +116,12 @@ const ProductManagePage = () => {
         columns={columns}
         dataSource={tableData}
         pagination={false}
+        bordered={false}
+        style={{background:'transparent'}}
       />
       <Flex justify='center' style={{ marginTop: '1rem' }}>
         <Pagination
+          className='purple-pagination'
           current={current}
           onChange={onChange}
           defaultPageSize={query.limit}
@@ -180,8 +183,7 @@ const SellProductModal = ({ product }: { product: IProduct & { key: string } }) 
       <Button
         onClick={showModal}
         type='primary'
-        className='table-btn'
-        style={{ backgroundColor: 'royalblue' }}
+        className='table-btn action-btn btn-sell'
       >
         Sell
       </Button>
@@ -283,8 +285,7 @@ const AddStockModal = ({ product }: { product: IProduct & { key: string } }) => 
       <Button
         onClick={showModal}
         type='primary'
-        className='table-btn'
-        style={{ backgroundColor: 'blue' }}
+        className='table-btn action-btn btn-stock'
       >
         Add Stock
       </Button>
@@ -357,8 +358,7 @@ const UpdateProductModal = ({ product }: { product: IProduct & { key: string } }
       <Button
         onClick={showModal}
         type='primary'
-        className='table-btn-small'
-        style={{ backgroundColor: 'green' }}
+        className='table-btn-small action-btn-small btn-edit'
       >
         <EditFilled />
       </Button>
@@ -508,8 +508,7 @@ const DeleteProductModal = ({ id }: { id: string }) => {
       <Button
         onClick={showModal}
         type='primary'
-        className='table-btn-small'
-        style={{ backgroundColor: 'red' }}
+        className='table-btn-small action-btn-small btn-delete'
       >
         <DeleteFilled />
       </Button>

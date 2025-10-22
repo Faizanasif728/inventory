@@ -15,18 +15,10 @@ const ProductManagementFilter = ({query, setQuery}: ProductManagementFilterProps
   const {data: brands} = useGetAllBrandsQuery(undefined);
 
   return (
-    <Flex
-      style={{
-        border: '1px solid grey',
-        padding: '1rem',
-        marginBottom: '.5rem',
-        borderRadius: '1rem',
-        boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.4) inset',
-      }}
-    >
+    <Flex className='filter-bar'>
       <Row gutter={2} style={{width: '100%'}}>
         <Col xs={{span: 24}} md={{span: 8}}>
-          <label style={{fontWeight: 700}}>Price Range</label>
+          <label className='filter-label'>Price Range</label>
           <Slider
             range
             step={100}
@@ -42,7 +34,7 @@ const ProductManagementFilter = ({query, setQuery}: ProductManagementFilterProps
           />
         </Col>
         <Col xs={{span: 24}} md={{span: 8}}>
-          <label style={{fontWeight: 700}}>Search by product name</label>
+          <label className='filter-label'>Search by product name</label>
           <input
             type='text'
             value={query.name}
@@ -52,7 +44,7 @@ const ProductManagementFilter = ({query, setQuery}: ProductManagementFilterProps
           />
         </Col>
         <Col xs={{span: 24}} md={{span: 4}}>
-          <label style={{fontWeight: 700}}>Filter by Category</label>
+          <label className='filter-label'>Filter by Category</label>
           <select
             name='category'
             className={`input-field`}
@@ -69,7 +61,7 @@ const ProductManagementFilter = ({query, setQuery}: ProductManagementFilterProps
           </select>
         </Col>
         <Col xs={{span: 24}} md={{span: 4}}>
-          <label style={{fontWeight: 700}}>Filter by Brand</label>
+          <label className='filter-label'>Filter by Brand</label>
           <select
             name='Brand'
             className={`input-field`}

@@ -35,7 +35,7 @@ const CreateSellerModal = ({ openModal, setOpenModal }: CreateSellerModalProps) 
   return (
     <>
       <Modal
-        title='Create New Seller!'
+        title={<span style={{color:'#4F0341', fontWeight:900}}>Create New Seller!</span>}
         centered
         open={openModal}
         onOk={() => setOpenModal(false)}
@@ -69,7 +69,7 @@ const CreateSellerModal = ({ openModal, setOpenModal }: CreateSellerModalProps) 
             required={true}
           />
           <Flex justify='center' style={{ margin: '1rem' }}>
-            <Button key='submit' type='primary' htmlType='submit' disabled={isLoading}>
+            <Button key='submit' type='primary' className='btn-primary-purple' htmlType='submit' disabled={isLoading}>
               {isLoading && <SpinnerIcon className='spin' weight='bold' />}
               Create Seller
             </Button>

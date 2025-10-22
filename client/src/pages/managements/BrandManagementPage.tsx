@@ -59,11 +59,14 @@ const BrandManagementPage = () => {
         <Button
           type='primary'
           onClick={() => setIsCreateBrandOpen(true)}
+          className='btn-primary-purple'
           style={{ fontWeight: 700 }}
         >
           <PlusOutlined /> Create Brand
         </Button>
-        <SearchInput setQuery={setQuery} placeholder='Search Brand...' />
+        <div style={{minWidth:'320px'}}>
+          <SearchInput setQuery={setQuery} placeholder='Search Brand...' />
+        </div>
       </Flex>
       <Table
         size='small'
@@ -71,9 +74,11 @@ const BrandManagementPage = () => {
         columns={columns}
         dataSource={tableData}
         pagination={false}
+        style={{background:'transparent'}}
       />
       <Flex justify='center' style={{ marginTop: '1rem' }}>
         <Pagination
+          className='purple-pagination'
           current={query.page}
           onChange={onChange}
           defaultPageSize={query.limit}
@@ -115,8 +120,7 @@ const DeleteModal = ({ id }: { id: string }) => {
       <Button
         onClick={showModal}
         type='primary'
-        className='table-btn-small'
-        style={{ backgroundColor: 'red' }}
+        className='table-btn-small action-btn-small btn-delete'
       >
         <DeleteFilled />
       </Button>

@@ -29,7 +29,7 @@ const CreateBrandModal = ({ openModal, setOpenModal }: CreateBrandModalProps) =>
   return (
     <>
       <Modal
-        title='Create New Brand!'
+        title={<span style={{color:'#4F0341', fontWeight:900}}>Create New Brand!</span>}
         centered
         open={openModal}
         onOk={() => setOpenModal(false)}
@@ -50,7 +50,7 @@ const CreateBrandModal = ({ openModal, setOpenModal }: CreateBrandModalProps) =>
             placeholder='Brand Name'
           />
           <Flex justify='center' style={{ margin: '1rem' }}>
-            <Button key='submit' type='primary' onClick={onSubmit} disabled={isLoading}>
+            <Button key='submit' type='primary' className='btn-primary-purple' onClick={onSubmit} disabled={isLoading}>
               {isLoading && <SpinnerIcon className='spin' weight='bold' />}
               Create Brand
             </Button>

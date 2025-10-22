@@ -50,13 +50,7 @@ const CreateProduct = () => {
 
   return (
     <>
-      <Row
-        gutter={30}
-        style={{
-          height: 'calc(100vh - 6rem)',
-          overflow: 'auto',
-        }}
-      >
+      <Row gutter={30}>
         <Col
           xs={{ span: 24 }}
           lg={{ span: 14 }}
@@ -69,8 +63,10 @@ const CreateProduct = () => {
             style={{
               width: '100%',
               padding: '1rem 2rem',
-              border: '1px solid #164863',
-              borderRadius: '.6rem',
+              border: 'none',
+              borderRadius: '1rem',
+              background: 'transparent',
+              boxShadow: 'none'
             }}
           >
             <h1
@@ -79,6 +75,7 @@ const CreateProduct = () => {
                 fontWeight: '900',
                 textAlign: 'center',
                 textTransform: 'uppercase',
+                color: '#4F0341',
               }}
             >
               Add New Product
@@ -186,6 +183,7 @@ const CreateProduct = () => {
                   htmlType='submit'
                   type='primary'
                   disabled={isCreatingProduct}
+                  className='btn-primary-purple'
                   style={{ textTransform: 'uppercase', fontWeight: 'bold' }}
                 >
                   {isCreatingProduct && <SpinnerIcon className='spin' weight='bold' />}
@@ -202,8 +200,10 @@ const CreateProduct = () => {
               width: '100%',
               height: '100%',
               padding: '1rem 2rem',
-              border: '1px solid #164863',
-              borderRadius: '.6rem',
+              border: 'none',
+              borderRadius: '1rem',
+              background: 'transparent',
+              boxShadow: 'none',
               justifyContent: 'space-around',
             }}
           >
@@ -212,8 +212,10 @@ const CreateProduct = () => {
               vertical
               style={{
                 padding: '1rem 2rem',
-                border: '1px solid #b6cbd7',
-                borderRadius: '.6rem',
+                border: 'none',
+                borderRadius: '1rem',
+                background: 'transparent',
+                boxShadow: 'none',
                 marginBottom: '1rem',
               }}
             >
@@ -223,6 +225,7 @@ const CreateProduct = () => {
                   marginBottom: '.6rem',
                   fontWeight: '900',
                   textTransform: 'uppercase',
+                  color: '#4F0341',
                 }}
               >
                 Create New Category
@@ -230,6 +233,7 @@ const CreateProduct = () => {
               <Button
                 htmlType='button'
                 type='primary'
+                className='btn-primary-purple'
                 style={{ textTransform: 'uppercase', fontWeight: 'bold' }}
                 onClick={() => setIsCreateCategoryOpen(true)}
               >
@@ -244,8 +248,10 @@ const CreateProduct = () => {
               vertical
               style={{
                 padding: '1rem 2rem',
-                border: '1px solid #b6cbd7',
-                borderRadius: '.6rem',
+                border: 'none',
+                borderRadius: '1rem',
+                background: 'transparent',
+                boxShadow: 'none',
               }}
             >
               <h3
@@ -254,6 +260,7 @@ const CreateProduct = () => {
                   marginBottom: '.6rem',
                   fontWeight: '900',
                   textTransform: 'uppercase',
+                  color: '#4F0341',
                 }}
               >
                 Create New Brand
@@ -261,6 +268,7 @@ const CreateProduct = () => {
               <Button
                 htmlType='button'
                 type='primary'
+                className='btn-primary-purple'
                 style={{ textTransform: 'uppercase', fontWeight: 'bold' }}
                 onClick={() => setIsCreateBrandOpen(true)}
               >

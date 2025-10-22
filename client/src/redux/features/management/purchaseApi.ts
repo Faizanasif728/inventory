@@ -34,7 +34,15 @@ const purchaseApi = baseApi.injectEndpoints({
       }),
       providesTags: ['purchases']
     }),
+
+    totalPurchasedQuantity: builder.query<any, void>({
+      query: () => ({
+        url: '/purchases/total-quantity',
+        method: 'GET'
+      }),
+      providesTags: ['purchases']
+    }),
   })
 })
 
-export const { useGetAllPurchasesQuery, useCreatePurchaseMutation, useDeletePurchaseMutation, useYearlyExpenseQuery } = purchaseApi
+export const { useGetAllPurchasesQuery, useCreatePurchaseMutation, useDeletePurchaseMutation, useYearlyExpenseQuery, useTotalPurchasedQuantityQuery } = purchaseApi

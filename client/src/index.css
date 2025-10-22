@@ -9,17 +9,251 @@ body {
   font-family: 'Nunito', sans-serif !important;
 }
 
+/* Home hero styles */
+.hero-title {
+  line-height: 1.1;
+  margin-bottom: .25rem;
+}
+
+.hero-wrap { padding-left: 5rem; }
+
+.hero-welcome {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+  letter-spacing: .02em;
+  font-size: 2.25rem;
+}
+
+.hero-shop {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-size: 3rem;
+  display: inline-block;
+  margin-top: .1rem;
+}
+
+.hero-monologue {
+  max-width: 620px;
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.75;
+  letter-spacing: .01em;
+  margin: .4rem 0 1rem 0;
+  font-style: italic;
+}
+
+.btn-hero {
+  padding: .9rem 1.4rem !important;
+  font-size: 1rem !important;
+  background: linear-gradient(135deg, #4F0341 0%, #6d1b5b 100%) !important;
+  box-shadow: 0 8px 18px rgba(79, 3, 65, 0.22);
+}
+
+.btn-hero:hover {
+  box-shadow: 0 12px 24px rgba(79, 3, 65, 0.28);
+}
+
+@media (max-width: 768px) {
+  .app-header { padding-left: 20px !important; padding-right: 20px !important; }
+  .hero-wrap { padding-left: 1rem; padding-right: 1rem; align-items: center; }
+  .hero-title { text-align: left; }
+  .hero-welcome { font-size: 1.6rem; }
+  .hero-shop { font-size: 2.1rem; letter-spacing: .06em; }
+  .btn-hero { padding: .75rem 1.2rem !important; font-size: .95rem !important; }
+  .btn-hero { margin-left: auto !important; margin-right: auto !important; }
+  .hero-monologue { margin-left: auto; margin-right: auto; text-align: justify; }
+  .hero-image { margin-top: 1rem; padding: 0 1rem; }
+}
+
+/* Footer responsiveness */
+.app-footer .footer-inner { width: 100%; }
+@media (max-width: 768px) {
+  .app-footer { padding: 1.25rem 1rem !important; }
+  .app-footer .footer-inner { max-width: 680px; }
+  .app-footer .footer-brand { width: 100%; margin-bottom: 1rem; }
+  .app-footer .footer-links { width: 100%; min-width: 0 !important; gap: 1.5rem !important; justify-content: space-between; }
+  .app-footer .footer-col { min-width: 46%; }
+  .app-footer .footer-social { width: 100%; align-items: flex-start !important; margin-top: 1rem; min-width: 0 !important; }
+  .app-footer .footer-social > div:last-child { gap: 1rem !important; }
+}
+
+/* Footer typography & spacing */
+.footer-brand-title { font-weight: 900; font-size: 1.4rem; letter-spacing: .02em; }
+.footer-description { margin-top: 8px; max-width: 420px; color: #4a4a4a; line-height: 1.7; font-size: .95rem; }
+.footer-section-title { font-weight: 900; color: #4F0341; margin-bottom: 8px; border-bottom: 2px solid #4F0341; display: inline-block; padding-bottom: 4px; letter-spacing: .04em; }
+.footer-links-list { list-style: none; padding: 0; margin: 0; line-height: 2; }
+.footer-link { color: #4F0341; font-weight: 700; text-decoration: none; }
+.footer-link:hover { color: #4F0341; text-decoration: underline; }
+.footer-social-link { color: #4F0341; display: inline-flex; }
+.footer-social-icons { gap: 1rem; }
+
+@media (max-width: 768px) {
+  .footer-brand-title { font-size: 1.25rem; }
+  .footer-description { font-size: .95rem; }
+  .footer-section-title { font-size: 1rem; }
+  .footer-links-list { line-height: 1.9; }
+}
+
+/* Purple theme for auth (2025 look) */
+.auth-page {
+  min-height: 100vh;
+  background: #ffffff; /* white */
+}
+
+.auth-card {
+  width: 420px;
+  padding: 2.5rem;
+  border-radius: 1rem;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.auth-title {
+  margin-bottom: .8rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: #4F0341; /* Tyrian purple */
+  font-weight: 900;
+  font-size: 2.1rem;
+}
+
+.auth-subtext {
+  text-align: center;
+  font-size: .95rem;
+  color: #000;
+  margin-bottom: 1rem;
+}
+
+.input-label {
+  display: block;
+  font-weight: 800;
+  color: #4F0341; /* Tyrian purple */
+  margin: .3rem 0 .2rem 2px;
+}
+
+.auth-footer {
+  margin-top: 1rem;
+  text-align: center;
+  color: #111827;
+}
+.auth-footer .muted-link {
+  font-weight: 700;
+}
+
+.auth-inline-note {
+  margin: .3rem 0 .6rem 2px;
+  color: #000;
+  font-size: .9rem;
+}
+
+.label-row {
+  display: flex;
+  align-items: baseline;
+  gap: .5rem;
+}
+
+.input-with-icon {
+  position: relative;
+}
+
+.icon-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: #4F0341;
+  cursor: pointer;
+}
+
+.icon-btn:hover {
+  color: #4F0341;
+}
+
+.link-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: #4F0341;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.link-btn:hover {
+  color: #4F0341;
+}
+
+.field-error {
+  display: block;
+  margin: .15rem 0 .4rem 4px;
+  font-size: .85rem;
+  color: #b91c1c;
+}
+
 .input-field {
   width: 100%;
   outline: none;
-  padding: .5rem;
-  border-radius: 6px;
-  border: 1px solid gray;
+  padding: .65rem .9rem; /* target 44px touch size */
+  border-radius: 10px; /* ~50% of button's pill roundness */
+  border: 1px solid #4F0341; /* Tyrian purple */
   margin-bottom: .5rem;
+  background-color: #fff;
+  transition: border-color 200ms, box-shadow 200ms, background-color 200ms;
+}
+
+select.input-field {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M5 7l5 5 5-5' stroke='%234F0341' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right .6rem center;
+  padding-right: 2rem;
 }
 
 .input-field-error {
-  border: 1px solid red;
+  border: 1px solid #ef4444;
+}
+
+.input-field:focus {
+  border-color: #4F0341;
+  box-shadow: 0 0 0 4px rgba(79, 3, 65, 0.5); /* thicker focus ring with Tyrian */
+}
+
+.btn-primary-purple {
+  background-color: #4F0341 !important; /* Tyrian purple */
+  color: #fff !important;
+  font-weight: 800;
+  letter-spacing: .04em;
+  border: none !important;
+  border-radius: 9999px !important; /* pill shape */
+  transition: background-color 180ms ease, box-shadow 180ms ease, transform 60ms ease;
+}
+
+.btn-primary-purple:hover,
+.btn-primary-purple:focus {
+  background-color: #4F0341 !important; /* Tyrian hover */
+  box-shadow: 0 8px 18px rgba(79, 3, 65, 0.22);
+}
+
+.btn-primary-purple:active {
+  transform: translateY(0);
+}
+
+.muted-link {
+  color: #4F0341; /* Tyrian purple */
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.muted-link:hover {
+  color: #4F0341; /* Tyrian purple */
+  text-decoration: none; /* no underline on hover */
 }
 
 li.ant-menu-item {
@@ -55,7 +289,14 @@ li.ant-menu-item {
 
 .app-sidebar-menu .ant-menu-item:hover a,
 .app-sidebar-menu .ant-menu-submenu-title:hover .ant-menu-title-content {
-  color: #1677ff !important; /* AntD blue */
+  color: #4F0341 !important; /* Tyrian hover */
+}
+
+/* Selected/active text color in purple while keeping background transparent */
+.app-sidebar-menu .ant-menu-item-selected a,
+.app-sidebar-menu .ant-menu-item-selected .ant-menu-title-content,
+.app-sidebar-menu .ant-menu-item-active a {
+  color: #4F0341 !important;
 }
 
 /* Logout as text-only, red icon/text, no bg on hover */
@@ -72,7 +313,8 @@ li.ant-menu-item {
 
 .label {
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 800;
+  color: #4F0341;
 }
 
 /* Default browser scrollbar: remove custom styling */
@@ -106,6 +348,53 @@ li.ant-menu-item {
   background-color: #e0e0e0;
 }
 
+/* Product filter bar */
+.filter-bar {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: .75rem;
+  border-radius: 1rem;
+  background: transparent; /* no extra bg */
+  box-shadow: none; /* no inset shadow */
+  border: 1px solid #4F034155; /* subtle Tyrian outline for structure */
+}
+
+.filter-label {
+  display: block;
+  font-weight: 800;
+  color: #4F0341;
+  margin: .2rem 0 .2rem 2px;
+}
+/* Tyrianize Antd slider inside filter bar */
+.filter-bar .ant-slider .ant-slider-track {
+  background-color: #4F0341;
+}
+.filter-bar .ant-slider .ant-slider-handle::after {
+  box-shadow: 0 0 0 2px #4F0341;
+  border: 2px solid #4F0341;
+}
+.filter-bar .ant-slider:hover .ant-slider-track {
+  background-color: #4F0341;
+}
+
+/* Ant Table on purple background: remove white content bg */
+.ant-table-container, .ant-table-content, .ant-table-body {
+  background: transparent !important;
+}
+.ant-table {
+  background: transparent !important;
+}
+.ant-table-thead > tr > th {
+  background: #ffffff !important; /* white header */
+  color: #4F0341;
+}
+.ant-table-tbody > tr > td {
+  background: transparent !important;
+}
+.ant-table-tbody > tr:hover > td {
+  background: rgba(79, 3, 65, 0.05) !important; /* very light Tyrian hover */
+}
+
 .query-filter {
   width: 75%;
 }
@@ -128,7 +417,9 @@ li.ant-menu-item {
   margin: .5rem;
   min-height: 150px;
   border-radius: 1rem;
-  border: 1px solid gray;
+  border: 1px solid #4F0341; /* Tyrian purple */
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(79, 3, 65, 0.08), 0 2px 6px rgba(0,0,0,0.04);
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -138,16 +429,34 @@ li.ant-menu-item {
 
 .number-card h3 {
   font-size: 1.4rem;
+  color: #4F0341; /* Tyrian purple */
 }
 
 .number-card h1 {
   font-size: 2.5rem;
+  color: #4F0341; /* Tyrian purple */
 }
 
 .update-sale-modal {
   border: 1px solid gray;
   padding: 2rem;
   border-radius: 1rem;
+}
+
+/* Dashboard panels (charts) */
+.panel-card {
+  border: 1px solid #4F0341;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(79, 3, 65, 0.08), 0 2px 6px rgba(0,0,0,0.04);
+}
+
+.panel-title {
+  text-align: center;
+  margin-bottom: .5rem;
+  color: #4F0341;
 }
 
 .bulk-delete-btn {
@@ -186,6 +495,64 @@ li.ant-menu-item {
   font-weight: 600;
 }
 
+/* Unified action buttons for tables */
+.action-btn {
+  border: none !important;
+  border-radius: 9999px !important;
+  padding: 0 .75rem !important;
+  height: 30px !important;
+  font-weight: 800 !important;
+  letter-spacing: .02em;
+  color: #fff !important;
+}
+
+.action-btn-small {
+  width: 30px !important;
+  height: 30px !important;
+  border-radius: 9999px !important;
+  padding: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff !important;
+  border: none !important;
+}
+
+.btn-sell { background-color: #7c3aed !important; }
+.btn-sell:hover { background-color: #6d28d9 !important; }
+
+.btn-stock { background-color: #2563eb !important; }
+.btn-stock:hover { background-color: #1d4ed8 !important; }
+
+.btn-edit { background-color: #16a34a !important; }
+.btn-edit:hover { background-color: #15803d !important; }
+
+.btn-delete { background-color: #ef4444 !important; }
+.btn-delete:hover { background-color: #dc2626 !important; }
+
+/* Purple-styled pagination */
+.purple-pagination .ant-pagination-item {
+  border-radius: 9999px;
+  border-color: transparent;
+  background: transparent;
+}
+.purple-pagination .ant-pagination-item a { color: #4F0341; font-weight: 700; }
+.purple-pagination .ant-pagination-item-active {
+  background: #4F0341;
+}
+.purple-pagination .ant-pagination-item-active a { color: #fff; }
+.purple-pagination .ant-pagination-prev .ant-pagination-item-link,
+.purple-pagination .ant-pagination-next .ant-pagination-item-link {
+  border-radius: 9999px;
+  border-color: #4F0341;
+  color: #4F0341;
+}
+.purple-pagination .ant-pagination-prev:hover .ant-pagination-item-link,
+.purple-pagination .ant-pagination-next:hover .ant-pagination-item-link {
+  background: #ffffff;
+  border-color: #4F0341;
+}
+
 @keyframes spin-animation {
   from {
     transform: rotate(0deg);
@@ -199,4 +566,26 @@ li.ant-menu-item {
 .spin {
   display: inline-block;
   animation: spin-animation 2s linear infinite;
+}
+
+/* Hide top nav links on small screens */
+@media (max-width: 768px) {
+  .top-nav-links { display: none !important; }
+  body { overflow-x: hidden; }
+  html { overflow-x: hidden; }
+}
+
+/* Tyrian purple for Ant Design search input (used on Sale Management) */
+.ant-input-affix-wrapper {
+  border-color: #4F0341 !important;
+}
+.ant-input-affix-wrapper:hover,
+.ant-input-affix-wrapper:focus,
+.ant-input-affix-wrapper-focused,
+.ant-input-affix-wrapper:focus-within {
+  border-color: #4F0341 !important;
+  box-shadow: 0 0 0 2px rgba(79, 3, 65, 0.15) !important;
+}
+.ant-input-prefix {
+  color: #4F0341;
 }

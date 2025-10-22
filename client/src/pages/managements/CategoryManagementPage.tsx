@@ -56,10 +56,12 @@ const CategoryManagementPage = () => {
   return (
     <>
       <Flex justify='space-between' align='center' style={{ margin: '5px' }}>
-        <Button type='primary' onClick={() => setShowCreateCategory(true)} style={{ fontWeight: 700 }}>
+        <Button type='primary' onClick={() => setShowCreateCategory(true)} className='btn-primary-purple' style={{ fontWeight: 700 }}>
           <PlusOutlined /> Create Category
         </Button>
-        <SearchInput setQuery={setQuery} placeholder='Search Category...' />
+        <div style={{minWidth:'320px'}}>
+          <SearchInput setQuery={setQuery} placeholder='Search Category...' />
+        </div>
       </Flex>
       <CreateCategoryModal openModal={showCreateCategory} setOpenModal={setShowCreateCategory} />
       <Table
@@ -68,9 +70,11 @@ const CategoryManagementPage = () => {
         columns={columns}
         dataSource={tableData}
         pagination={false}
+        style={{background:'transparent'}}
       />
       <Flex justify='center' style={{ marginTop: '1rem' }}>
         <Pagination
+          className='purple-pagination'
           current={query.page}
           onChange={onChange}
           defaultPageSize={query.limit}
@@ -111,8 +115,7 @@ const DeleteModal = ({ id }: { id: string }) => {
       <Button
         onClick={showModal}
         type='primary'
-        className='table-btn-small'
-        style={{ backgroundColor: 'red' }}
+        className='table-btn-small action-btn-small btn-delete'
       >
         <DeleteFilled />
       </Button>

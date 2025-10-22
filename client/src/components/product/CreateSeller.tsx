@@ -11,8 +11,10 @@ const CreateSeller = () => {
         vertical
         style={{
           padding: '1rem 2rem',
-          border: '1px solid #b6cbd7',
-          borderRadius: '.6rem',
+          border: 'none',
+          borderRadius: '1rem',
+          background: 'transparent',
+          boxShadow: 'none',
           marginBottom: '1rem',
         }}
       >
@@ -22,6 +24,7 @@ const CreateSeller = () => {
             marginBottom: '.6rem',
             fontWeight: '900',
             textTransform: 'uppercase',
+            color: '#4F0341',
           }}
         >
           Create New Seller
@@ -30,6 +33,7 @@ const CreateSeller = () => {
         <Button
           htmlType='submit'
           type='primary'
+          className='btn-primary-purple'
           style={{ textTransform: 'uppercase', fontWeight: 'bold' }}
           onClick={() => setCreateSellerModalOpen(true)}
         >

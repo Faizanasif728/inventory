@@ -1,5 +1,5 @@
-import { Flex } from 'antd';
-import loader from '../assets/loading.gif';
+import { Flex, Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 
 const Loader = () => (
   <Flex
@@ -10,9 +10,7 @@ const Loader = () => (
       height: 'calc(100vh - 10rem)',
     }}
   >
-    <Flex gap='small' justify='center' align='center'>
-      <img src={loader} alt='loader' />
-    </Flex>
+    <Spin indicator={<LoadingOutlined style={{ fontSize: 48, color: '#4F0341' }} spin />} />
   </Flex>
 );
 

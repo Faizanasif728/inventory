@@ -14,8 +14,13 @@ import { NavLink } from 'react-router-dom';
 
 export const sidebarItems = [
   {
+    key: 'Home',
+    label: <NavLink to='/'>HOME</NavLink>,
+    icon: React.createElement(ProfileFilled),
+  },
+  {
     key: 'Dashboard',
-    label: <NavLink to='/'>DASHBOARD</NavLink>,
+    label: <NavLink to='/dashboard'>DASHBOARD</NavLink>,
     icon: React.createElement(ProfileFilled),
   },
   {
