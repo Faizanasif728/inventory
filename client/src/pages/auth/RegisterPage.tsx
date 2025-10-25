@@ -1,5 +1,5 @@
-import { SpinnerIcon, Eye, EyeSlash } from '@phosphor-icons/react';
-import { Button, Flex, Row, Col } from 'antd';
+import { SpinnerIcon } from '@phosphor-icons/react';
+import { Button, Flex, Row, Col, Input } from 'antd';
 import { FieldValues, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import toastMessage from '../../lib/toastMessage';
@@ -8,28 +8,32 @@ import { useAppDispatch } from '../../redux/hooks';
 import { loginUser } from '../../redux/services/authSlice';
 import decodeToken from '../../utils/decodeToken';
 import registerBanner from '../../assets/iphone-image.png';
-import { useState } from 'react';
 
 const RegisterPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [userRegistration, { isLoading }] = useRegisterMutation();
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const {
     handleSubmit,
     register,
+    watch,
     formState: { errors },
   } = useForm();
 
+  const passwordValue = watch('password');
+  const confirmPasswordValue = watch('confirmPassword');
+  const nameValue = watch('name');
+  const emailValue = watch('email');
+
   const onSubmit = async (data: FieldValues) => {
     try {
-      const res = await userRegistration(data).unwrap();
-
       if (data.password !== data.confirmPassword) {
         toastMessage({ icon: 'error', text: 'Password and confirm password must be same!' });
         return;
       }
+
+      const res = await userRegistration(data).unwrap();
+
       if (res.statusCode === 201) {
         const user = decodeToken(res.data.token);
         dispatch(loginUser({ token: res.data.token, user }));
@@ -52,93 +56,155 @@ const RegisterPage = () => {
             vertical
             className='auth-card'
             style={{
-              width: '420px',
-              padding: '2.5rem',
+              width: '100%',
+              maxWidth: '420px',
+              padding: 'clamp(1.5rem, 5vw, 2.5rem)',
             }}
           >
-            <h1 className='auth-title'>
+            <h1 className='auth-title' style={{ marginBottom: '0.5rem' }}>
               Register
             </h1>
-            <p className='auth-subtext'>Create an account to manage inventory smarter.</p>
+            <p className='auth-subtext' style={{ marginBottom: '1.5rem' }}>Create an account to manage inventory smarter.</p>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className='label-row'>
-                <label htmlFor='name' className='input-label'>Name:</label>
+              {/* Name Field */}
+              <div style={{ marginBottom: '1rem' }}>
+                <label htmlFor='name' className='input-label' style={{ marginBottom: '0.5rem', display: 'block' }}>Name:</label>
+                <Input
+                  size='large'
+                  placeholder='Enter your name here'
+                  {...register('name', { required: true })}
+                  id='name'
+                  value={nameValue}
+                  onChange={(e) => {
+                    const event = {
+                      target: {
+                        name: 'name',
+                        value: e.target.value,
+                      },
+                    };
+                    register('name').onChange?.(event);
+                  }}
+                  status={errors['name'] ? 'error' : ''}
+                  style={{
+                    borderRadius: '9px',
+                    borderColor: errors['name'] ? '#ef4444' : '#4F0341',
+                  }}
+                  className={errors['name'] ? 'input-field-error' : ''}
+                />
+                {errors['name'] && <span className='field-error'>Name is required</span>}
               </div>
-              <input
-                type='text'
-                {...register('name', { required: true })}
-                placeholder='Enter your name here'
-                id='name'
-                className={`input-field ${errors['name'] ? 'input-field-error' : ''}`}
-              />
-              {errors['name'] && <span className='field-error'>Name is required</span>}
-              <div className='label-row'>
-                <label htmlFor='email' className='input-label'>Email:</label>
+
+              {/* Email Field */}
+              <div style={{ marginBottom: '1rem' }}>
+                <label htmlFor='email' className='input-label' style={{ marginBottom: '0.5rem', display: 'block' }}>Email:</label>
+                <Input
+                  size='large'
+                  placeholder='Enter your email here'
+                  {...register('email', { required: true })}
+                  id='email'
+                  value={emailValue}
+                  onChange={(e) => {
+                    const event = {
+                      target: {
+                        name: 'email',
+                        value: e.target.value,
+                      },
+                    };
+                    register('email').onChange?.(event);
+                  }}
+                  status={errors['email'] ? 'error' : ''}
+                  style={{
+                    borderRadius: '9px',
+                    borderColor: errors['email'] ? '#ef4444' : '#4F0341',
+                  }}
+                  className={errors['email'] ? 'input-field-error' : ''}
+                />
+                {errors['email'] && <span className='field-error'>Email is required</span>}
               </div>
-              <input
-                type='text'
-                {...register('email', { required: true })}
-                placeholder='Enter your email here'
-                id='email'
-                className={`input-field ${errors['email'] ? 'input-field-error' : ''}`}
-              />
-              {errors['email'] && <span className='field-error'>Email is required</span>}
-              <div className='label-row'>
-                <label htmlFor='password' className='input-label'>Password:</label>
-              </div>
-              <div className='input-with-icon'>
-                <input
-                  type={showPassword ? 'text' : 'password'}
+
+              {/* Password Field */}
+              <div style={{ marginBottom: '1.5rem' }}>
+                <label htmlFor='password' className='input-label' style={{ marginBottom: '0.5rem', display: 'block' }}>Password:</label>
+                <Input.Password
+                  size='large'
                   placeholder='Enter your password here'
                   {...register('password', { required: true })}
                   id='password'
-                  className={`input-field ${errors['password'] ? 'input-field-error' : ''}`}
+                  value={passwordValue}
+                  onChange={(e) => {
+                    const event = {
+                      target: {
+                        name: 'password',
+                        value: e.target.value,
+                      },
+                    };
+                    register('password').onChange?.(event);
+                  }}
+                  status={errors['password'] ? 'error' : ''}
+                  style={{
+                    borderRadius: '9px',
+                    borderColor: errors['password'] ? '#ef4444' : '#4F0341',
+                  }}
+                  className={errors['password'] ? 'input-field-error' : ''}
                 />
-                <button
-                  type='button'
-                  aria-label={showPassword ? 'Hide password' : 'Show password'}
-                  className='icon-btn'
-                  onClick={() => setShowPassword((v) => !v)}
-                >
-                  {showPassword ? <EyeSlash size={20} weight='bold' /> : <Eye size={20} weight='bold' />}
-                </button>
+                {errors['password'] && <span className='field-error'>Password is required</span>}
               </div>
-              {errors['password'] && <span className='field-error'>Password is required</span>}
-              <div className='label-row'>
-                <label htmlFor='confirmPassword' className='input-label'>Confirm Password:</label>
-              </div>
-              <div className='input-with-icon'>
-                <input
-                  type={showConfirmPassword ? 'text' : 'password'}
+
+              {/* Confirm Password Field */}
+              <div style={{ marginBottom: '1rem' }}>
+                <label htmlFor='confirmPassword' className='input-label' style={{ marginBottom: '0.5rem', display: 'block' }}>Confirm Password:</label>
+                <Input.Password
+                  size='large'
                   placeholder='Enter your confirm password here'
                   {...register('confirmPassword', { required: true })}
                   id='confirmPassword'
-                  className={`input-field ${errors['confirmPassword'] ? 'input-field-error' : ''}`}
+                  value={confirmPasswordValue}
+                  onChange={(e) => {
+                    const event = {
+                      target: {
+                        name: 'confirmPassword',
+                        value: e.target.value,
+                      },
+                    };
+                    register('confirmPassword').onChange?.(event);
+                  }}
+                  status={errors['confirmPassword'] ? 'error' : ''}
+                  style={{
+                    borderRadius: '9px',
+                    borderColor: errors['confirmPassword'] ? '#ef4444' : '#4F0341',
+                  }}
+                  className={errors['confirmPassword'] ? 'input-field-error' : ''}
                 />
-                <button
-                  type='button'
-                  aria-label={showConfirmPassword ? 'Hide confirm password' : 'Show confirm password'}
-                  className='icon-btn'
-                  onClick={() => setShowConfirmPassword((v) => !v)}
-                >
-                  {showConfirmPassword ? <EyeSlash size={20} weight='bold' /> : <Eye size={20} weight='bold' />}
-                </button>
+                {errors['confirmPassword'] && (
+                  <span className='field-error'>Confirm Password is required</span>
+                )}
               </div>
-              {errors['confirmPassword'] && (
-                <span className='field-error'>Confirm Password is required</span>
-              )}
-              <p className='auth-inline-note'>
+
+              {/* Login Link */}
+              <p className='auth-inline-note' style={{ marginBottom: '1.5rem' }}>
                 Already have an account? <Link className='muted-link' to='/login'>Login Here</Link>
               </p>
-              <Flex justify='center'>
+
+              {/* Register Button */}
+              <Flex justify='center' style={{ marginBottom: '1rem' }}>
                 <Button
                   htmlType='submit'
                   type='primary'
                   className='btn-primary-purple'
-                  style={{ textTransform: 'uppercase', fontWeight: 'bold', width: '100%' }}
+                  loading={isLoading}
+                  disabled={isLoading}
+                  style={{ 
+                    textTransform: 'uppercase', 
+                    fontWeight: 'bold', 
+                    width: '100%',
+                    borderRadius: '9999px',
+                    letterSpacing: '.02em',
+                    height: '44px',
+                    fontSize: '1rem'
+                  }}
                 >
                   {isLoading && <SpinnerIcon className='spin' weight='bold' />}
-                  Register
+                  {isLoading ? 'Registering...' : 'Register'}
                 </Button>
               </Flex>
             </form>

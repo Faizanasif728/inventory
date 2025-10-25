@@ -4,9 +4,11 @@ import {Button, Drawer, Layout, Menu} from 'antd';
 import {LogoutOutlined, MenuOutlined, CloseOutlined} from '@ant-design/icons';
 import {sidebarItems} from '../../constant/sidebarItems';
 import logo from '../../assets/inventory-logo.png';
+import userProPic from '../../assets/User.png';
 import AppFooter from './Footer';
 import {useAppDispatch} from '../../redux/hooks';
 import {logoutUser} from '../../redux/services/authSlice';
+import { useGetSelfProfileQuery } from '../../redux/features/authApi';
 
 const {Header, Content} = Layout;
 
@@ -14,6 +16,7 @@ const Sidebar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { data } = useGetSelfProfileQuery(undefined);
 
   const handleLogout = () => {
     dispatch(logoutUser());
@@ -21,6 +24,12 @@ const Sidebar = () => {
   };
 
   const closeDrawer = () => setIsDrawerOpen(false);
+  
+  const handleProfileClick = () => {
+    navigate('/profile');
+  };
+
+  const userData = data?.data;
 
   return (
     <Layout style={{minHeight: '100vh', background: '#ffffff'}}>
@@ -48,6 +57,47 @@ const Sidebar = () => {
           <NavLink to='/sales' style={{ color: '#4F0341', fontWeight: 800, fontSize: 18 }}>Sales</NavLink>
           <NavLink to='/purchases' style={{ color: '#4F0341', fontWeight: 800, fontSize: 18 }}>Purchases</NavLink>
         </div>
+        
+        {/* Profile Icon on Right Side - Using Absolute Positioning */}
+        <button
+          onClick={handleProfileClick}
+          style={{
+            position: 'absolute',
+            right: '1.5rem',
+            width: '50px',
+            height: '50px',
+            borderRadius: '50%',
+            border: '2px solid #4F0341',
+            padding: 0,
+            cursor: 'pointer',
+            overflow: 'hidden',
+            boxShadow: '0 4px 12px rgba(79, 3, 65, 0.15)',
+            transition: 'all 200ms ease',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'transparent'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.boxShadow = '0 6px 16px rgba(79, 3, 65, 0.25)';
+            e.currentTarget.style.transform = 'scale(1.05)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.boxShadow = '0 4px 12px rgba(79, 3, 65, 0.15)';
+            e.currentTarget.style.transform = 'scale(1)';
+          }}
+        >
+          <img
+            src={userData?.avatar || userProPic}
+            alt='User Profile'
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              borderRadius: '50%'
+            }}
+          />
+        </button>
       </Header>
 
       <Drawer

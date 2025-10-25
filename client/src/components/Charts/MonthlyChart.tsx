@@ -33,12 +33,20 @@ const MonthlyChart = () => {
   return (
     <ResponsiveContainer width='100%' height={300}>
       <BarChart data={data}>
-        <CartesianGrid strokeDasharray='3 3' />
-        <XAxis dataKey='name' />
-        <YAxis />
-        <Tooltip />
+        <CartesianGrid strokeDasharray='3 3' stroke='#e0e0e0' />
+        <XAxis dataKey='name' stroke='#666' />
+        <YAxis stroke='#666' />
+        <Tooltip 
+          contentStyle={{ backgroundColor: '#fff', border: '1px solid #4F0341', borderRadius: '8px' }}
+          cursor={{ fill: 'rgba(79, 3, 65, 0.1)' }}
+        />
         <Legend />
-        <Bar name='Profit' dataKey='profit' fill='#164863' />
+        <Bar 
+          name='Profit' 
+          dataKey='profit' 
+          fill='#4F0341'
+          radius={[8, 8, 0, 0]}
+        />
       </BarChart>
     </ResponsiveContainer>
   );

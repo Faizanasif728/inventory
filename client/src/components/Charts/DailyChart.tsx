@@ -49,12 +49,29 @@ export default function DailyChart() {
           bottom: 0,
         }}
       >
-        <CartesianGrid strokeDasharray='3 3' />
-        <XAxis dataKey='name' />
-        <YAxis />
-        <Tooltip />
-        <Area name='Profit' type='monotone' dataKey='profit' stroke='#8884d8' fill='#164863' />
-        <Area type='monotone' dataKey='quantity' stroke='#8884d8' fill='#164863' />
+        <CartesianGrid strokeDasharray='3 3' stroke='#e0e0e0' />
+        <XAxis dataKey='name' stroke='#666' />
+        <YAxis stroke='#666' />
+        <Tooltip 
+          contentStyle={{ backgroundColor: '#fff', border: '1px solid #4F0341', borderRadius: '8px' }}
+          cursor={{ fill: 'rgba(79, 3, 65, 0.1)' }}
+        />
+        <Area 
+          name='Profit' 
+          type='monotone' 
+          dataKey='profit' 
+          stroke='#4F0341' 
+          fill='rgba(79, 3, 65, 0.3)'
+          strokeWidth={2}
+        />
+        <Area 
+          name='Quantity' 
+          type='monotone' 
+          dataKey='quantity' 
+          stroke='#8B5F9C' 
+          fill='rgba(139, 95, 156, 0.2)'
+          strokeWidth={2}
+        />
       </AreaChart>
     </ResponsiveContainer>
   );
