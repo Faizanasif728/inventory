@@ -52,14 +52,16 @@ const Sidebar = () => {
           icon={<MenuOutlined style={{color: '#4F0341', fontSize: 28}} />}
         />
         <img src={logo} alt='IMS Logo' style={{height: 40}} />
-        <div className='top-nav-links' style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+        <div className='top-nav-links' style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', display: 'flex', alignItems: 'center', gap: '1.25rem', flexWrap: 'nowrap', whiteSpace: 'nowrap' }}>
           <NavLink to='/' style={{ color: '#4F0341', fontWeight: 800, fontSize: 18 }}>Home</NavLink>
           {location.pathname !== '/' && (
             <NavLink to='/dashboard' style={{ color: '#4F0341', fontWeight: 800, fontSize: 18 }}>Dashboard</NavLink>
           )}
-          <NavLink to='/products' style={{ color: '#4F0341', fontWeight: 800, fontSize: 18 }}>Products</NavLink>
+          <NavLink to='/products' style={{ color: '#4F0341', fontWeight: 800, fontSize: 18 }}>Inventory</NavLink>
+          <NavLink to='/create-product' style={{ color: '#4F0341', fontWeight: 800, fontSize: 18 }}>Add Product</NavLink>
           <NavLink to='/sales' style={{ color: '#4F0341', fontWeight: 800, fontSize: 18 }}>Sales</NavLink>
           <NavLink to='/purchases' style={{ color: '#4F0341', fontWeight: 800, fontSize: 18 }}>Purchases</NavLink>
+          <NavLink to='/sales-history' style={{ color: '#4F0341', fontWeight: 800, fontSize: 18 }}>Sale History</NavLink>
         </div>
         
         {/* Profile Icon on Right Side - Using Absolute Positioning */}

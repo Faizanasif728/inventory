@@ -94,6 +94,7 @@ const CreateProduct = () => {
                 type='number'
                 name='price'
                 register={register}
+                min={0}
                 required={true}
               />
               <CustomInput
@@ -102,6 +103,7 @@ const CreateProduct = () => {
                 type='number'
                 name='stock'
                 register={register}
+                min={0}
                 required={true}
               />
               <Row>

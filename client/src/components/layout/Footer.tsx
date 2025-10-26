@@ -30,19 +30,19 @@ const AppFooter = () => {
             <div className='footer-col'>
               <div className='footer-section-title' style={{ fontSize: 'clamp(1rem, 2vw, 1.1rem)', marginBottom: '1rem' }}>Quick link</div>
               <ul className='footer-links-list' style={{ lineHeight: '2.2' }}>
-                <li><a className='footer-link' href='#' style={{ fontSize: 'clamp(0.9rem, 2vw, 0.95rem)' }}>About</a></li>
-                <li><a className='footer-link' href='#' style={{ fontSize: 'clamp(0.9rem, 2vw, 0.95rem)' }}>Contact</a></li>
-                <li><a className='footer-link' href='#' style={{ fontSize: 'clamp(0.9rem, 2vw, 0.95rem)' }}>Support</a></li>
-                <li><a className='footer-link' href='#' style={{ fontSize: 'clamp(0.9rem, 2vw, 0.95rem)' }}>Guideline</a></li>
+                <li><NavLink className='footer-link' to='/about' style={{ fontSize: 'clamp(0.9rem, 2vw, 0.95rem)' }} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>About</NavLink></li>
+                <li><NavLink className='footer-link' to='/contact' style={{ fontSize: 'clamp(0.9rem, 2vw, 0.95rem)' }} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Contact</NavLink></li>
+                <li><NavLink className='footer-link' to='/support' style={{ fontSize: 'clamp(0.9rem, 2vw, 0.95rem)' }} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Support</NavLink></li>
+                <li><NavLink className='footer-link' to='/guideline' style={{ fontSize: 'clamp(0.9rem, 2vw, 0.95rem)' }} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Guideline</NavLink></li>
               </ul>
             </div>
             <div className='footer-col'>
               <div className='footer-section-title' style={{ fontSize: 'clamp(1rem, 2vw, 1.1rem)', marginBottom: '1rem' }}>Company</div>
               <ul className='footer-links-list' style={{ lineHeight: '2.2' }}>
-                <li><NavLink className='footer-link' to='/' style={{ fontSize: 'clamp(0.9rem, 2vw, 0.95rem)' }}>Home</NavLink></li>
-                <li><NavLink className='footer-link' to='/products' style={{ fontSize: 'clamp(0.9rem, 2vw, 0.95rem)' }}>Products</NavLink></li>
-                <li><NavLink className='footer-link' to='/sales' style={{ fontSize: 'clamp(0.9rem, 2vw, 0.95rem)' }}>Sales</NavLink></li>
-                <li><NavLink className='footer-link' to='/purchases' style={{ fontSize: 'clamp(0.9rem, 2vw, 0.95rem)' }}>Purchases</NavLink></li>
+                <li><NavLink className='footer-link' to='/' style={{ fontSize: 'clamp(0.9rem, 2vw, 0.95rem)' }} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Home</NavLink></li>
+                <li><NavLink className='footer-link' to='/products' style={{ fontSize: 'clamp(0.9rem, 2vw, 0.95rem)' }} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Inventory</NavLink></li>
+                <li><NavLink className='footer-link' to='/sales' style={{ fontSize: 'clamp(0.9rem, 2vw, 0.95rem)' }} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Sales</NavLink></li>
+                <li><NavLink className='footer-link' to='/purchases' style={{ fontSize: 'clamp(0.9rem, 2vw, 0.95rem)' }} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Purchases</NavLink></li>
               </ul>
             </div>
           </Flex>

@@ -285,6 +285,28 @@ li.ant-menu-item {
 .app-sidebar-menu .ant-menu-title-content {
   color: #000 !important; /* default black */
   font-weight: 700;
+  font-size: 0.95rem; /* balanced sidebar label size */
+  line-height: 1.2;
+}
+
+/* Sidebar menu visual adjustments: alignment, spacing, and icon sizing */
+.app-sidebar-menu .ant-menu-item {
+  margin: 0 6px !important;
+  border-radius: 10px !important;
+  padding: 6px 10px !important;
+}
+.app-sidebar-menu .ant-menu-item .ant-menu-item-icon {
+  font-size: 16px !important;
+  width: 20px !important; /* equalize icon width for alignment */
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.app-sidebar-menu .ant-menu-title-content > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: .02em;
 }
 
 .app-sidebar-menu .ant-menu-item:hover a,
@@ -301,14 +323,21 @@ li.ant-menu-item {
 
 /* Logout as text-only, red icon/text, no bg on hover */
 .logout-btn {
-  background: transparent !important;
+  background: linear-gradient(135deg, rgba(239,68,68,.08), rgba(239,68,68,.03)) !important;
+  border: 1px solid rgba(239,68,68,.35) !important;
+  border-radius: 9999px !important;
+  padding: .65rem 1rem !important;
+  font-weight: 800 !important;
+  letter-spacing: .04em !important;
 }
 
 .logout-btn:hover,
 .logout-btn:active,
 .logout-btn:focus {
-  background: transparent !important;
+  background: rgba(239,68,68,.12) !important;
   color: #ff4d4f !important;
+  border-color: #ff4d4f !important;
+  box-shadow: 0 0 0 3px rgba(239,68,68,.15) !important;
 }
 
 .label {
@@ -789,4 +818,9 @@ select.input-field option:focus,
   [style*="grid-template-columns"][style*="minmax(300px"] {
     grid-template-columns: 1fr !important;
   }
+
+  /* Sale History - fix nested scrollbars and improve responsiveness */
+  .sale-history-grid { max-height: none !important; overflow: visible !important; padding-right: 0 !important; }
+  .sales { padding: .6rem 1rem 1rem 1rem; margin: .2rem 0; overflow-x: auto; overflow-y: visible; }
+  .sales .ant-table { min-width: 560px; }
 }

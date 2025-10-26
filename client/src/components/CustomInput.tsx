@@ -36,7 +36,7 @@ const CustomInput = ({
           type={type}
           placeholder={label}
           defaultValue={defaultValue}
-          {...register(name, { required: required })}
+          {...register(name, { required: required, ...(min !== undefined ? { min } : {}) })}
           readOnly={readOnly}
           min={min}
           className={`input-field ${errors[name] ? 'input-field-error' : ''}`}

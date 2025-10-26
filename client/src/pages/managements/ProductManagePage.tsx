@@ -88,9 +88,11 @@ const ProductManagePage = () => {
       dataIndex: 'stock',
       align: 'center',
       render: (stock: number) => {
-        if (stock === 0) return <Tag color='red'>OUT OF STOCK</Tag>;
-        if (stock <= 5) return <Tag color='gold'>LOW STOCK</Tag>;
-        return <Tag color='green'>IN STOCK</Tag>;
+        if (stock === 0)
+          return <span style={{ color: '#ef4444', fontWeight: 800 }}>Out of Stock</span>;
+        if (stock <= 5)
+          return <span style={{ color: '#eab308', fontWeight: 800 }}>Low Stock</span>;
+        return <span style={{ color: '#16a34a', fontWeight: 800 }}>In Stock</span>;
       },
     },
     {
@@ -257,6 +259,7 @@ const SellProductModal = ({ product }: { product: IProduct & { key: string } }) 
             required={true}
             register={register}
             type='number'
+            min={0}
           />
           <Flex justify='center' style={{ marginTop: '1rem' }}>
             <Button htmlType='submit' type='primary' disabled={isLoading} className='btn-primary-purple' style={{ textTransform: 'uppercase', fontWeight: 'bold' }}>
@@ -316,7 +319,7 @@ const AddStockModal = ({ product }: { product: IProduct & { key: string } }) => 
       </Button>
       <Modal title='Add Product to Stock' open={isModalOpen} onCancel={handleCancel} footer={null}>
         <form onSubmit={handleSubmit(onSubmit)} style={{ margin: '2rem' }}>
-          <CustomInput name='stock' label='Add Stock' register={register} type='number' />
+          <CustomInput name='stock' label='Add Stock' register={register} type='number' min={0} />
           <Flex justify='center' style={{ marginTop: '1rem' }}>
             <Button htmlType='submit' type='primary' disabled={isLoading} className='btn-primary-purple' style={{ textTransform: 'uppercase', fontWeight: 'bold' }}>
               {isLoading && <SpinnerIcon className='spin' weight='bold' />}
@@ -403,6 +406,7 @@ const UpdateProductModal = ({ product }: { product: IProduct & { key: string } }
             type='number'
             name='price'
             register={register}
+            min={0}
             required={true}
           />
           <Row>

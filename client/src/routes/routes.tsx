@@ -17,6 +17,10 @@ import ChangePasswordPage from '../pages/ChangePasswordPage';
 import EditProfilePage from '../pages/EditProfilePage';
 import CategoryManagementPage from '../pages/managements/CategoryManagementPage';
 import BrandManagementPage from '../pages/managements/BrandManagementPage';
+import About from '../pages/About';
+import Contact from '../pages/Contact';
+import Support from '../pages/Support';
+import Guideline from '../pages/Guideline';
 
 export const router = createBrowserRouter([
   {
@@ -100,6 +104,38 @@ export const router = createBrowserRouter([
         element: (
           <ProtectRoute>
             <BrandManagementPage />
+          </ProtectRoute>
+        ),
+      },
+      {
+        path: 'about',
+        element: (
+          <ProtectRoute>
+            <About />
+          </ProtectRoute>
+        ),
+      },
+      {
+        path: 'contact',
+        element: (
+          <ProtectRoute>
+            <Contact />
+          </ProtectRoute>
+        ),
+      },
+      {
+        path: 'support',
+        element: (
+          <ProtectRoute>
+            <Support />
+          </ProtectRoute>
+        ),
+      },
+      {
+        path: 'guideline',
+        element: (
+          <ProtectRoute>
+            <Guideline />
           </ProtectRoute>
         ),
       },
