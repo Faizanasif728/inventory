@@ -1,5 +1,5 @@
-import { UploadOutlined, ArrowLeftOutlined } from '@ant-design/icons';
-import { Button, Col, Flex, Row } from 'antd';
+import { UploadOutlined, ArrowLeftOutlined, DeleteOutlined } from '@ant-design/icons';
+import { Button, Flex } from 'antd';
 import userProPic from '../assets/User.png';
 import CustomInput from '../components/CustomInput';
 import { useForm } from 'react-hook-form';
@@ -9,17 +9,28 @@ import Loader from '../components/Loader';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
 import { config } from '../utils/config';
+import { useState } from 'react';
 
 const EditProfilePage = () => {
   const { data, isLoading } = useGetSelfProfileQuery(undefined);
   const [updateProfile] = useUpdateProfileMutation();
   const navigate = useNavigate();
+  const [avatarRemoved, setAvatarRemoved] = useState(false);
 
   if (isLoading) {
     return <Loader />;
   }
 
+  const isUploadDisabled = Boolean(data?.data?.avatar && !avatarRemoved);
+
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Enforce: user must remove existing photo before uploading a new one
+    if (isUploadDisabled) {
+      toast.error('Please remove your current photo before uploading a new one.');
+      // reset file input so selecting same file later still triggers change
+      e.currentTarget.value = '';
+      return;
+    }
     const toastId = toast.loading('Uploading Image...');
 
     const image = e.target.files?.[0] as any;
@@ -43,14 +54,37 @@ const EditProfilePage = () => {
         const imgUploadRes = await updateProfile({ avatar: res.secure_url }).unwrap();
 
         if (imgUploadRes.success) {
-          toast.success('Profile updated successfully', { id: toastId });
+          setAvatarRemoved(false);
+          toast.success('Image uploaded successfully.', { id: toastId });
+        } else {
+          toast.error('Failed to update profile with new image', { id: toastId });
         }
-        toast.success('Image Uploaded Successfully, now save update!', { id: toastId });
       } else {
         toast.error('Failed to Upload Image', { id: toastId });
       }
     } catch (error) {
       toast.error('Failed to Upload Image', { id: toastId });
+    }
+    // clear input to allow re-selecting same file name later
+    e.currentTarget.value = '';
+  };
+
+  const handleRemoveAvatar = async () => {
+    if (!data?.data?.avatar) {
+      toast.message('No profile image to remove.');
+      return;
+    }
+    const toastId = toast.loading('Removing current image...');
+    try {
+      const res = await updateProfile({ avatar: '' }).unwrap();
+      if (res.success) {
+        setAvatarRemoved(true);
+        toast.success('Removed current image. You can upload a new one now.', { id: toastId });
+      } else {
+        toast.error('Failed to remove image', { id: toastId });
+      }
+    } catch (error) {
+      toast.error('Failed to remove image', { id: toastId });
     }
   };
 
@@ -108,7 +142,7 @@ const EditProfilePage = () => {
               }}
             >
               <img
-                src={data?.data?.avatar || userProPic}
+                src={avatarRemoved ? userProPic : (data?.data?.avatar || userProPic)}
                 alt='user'
                 style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }}
               />
@@ -130,9 +164,10 @@ const EditProfilePage = () => {
                 style={{ display: 'none' }}
                 onChange={handleFileChange}
                 accept='image/*'
+                disabled={isUploadDisabled}
               />
               <label
-                htmlFor='avatar'
+                htmlFor={isUploadDisabled ? undefined : 'avatar'}
                 style={{
                   background: 'linear-gradient(135deg, #4F0341 0%, #6d1b5b 100%)',
                   color: '#fff',
@@ -142,10 +177,11 @@ const EditProfilePage = () => {
                   alignItems: 'center',
                   fontSize: 'clamp(0.85rem, 2vw, 1rem)',
                   borderRadius: '9999px',
-                  cursor: 'pointer',
+                  cursor: isUploadDisabled ? 'not-allowed' : 'pointer',
                   fontWeight: 800,
                   letterSpacing: '.02em',
-                  transition: 'all 200ms ease'
+                  transition: 'all 200ms ease',
+                  ...(isUploadDisabled ? { opacity: 0.6, pointerEvents: 'none', filter: 'grayscale(0.2)' } : {})
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.boxShadow = '0 8px 18px rgba(79, 3, 65, 0.22)';
@@ -155,10 +191,22 @@ const EditProfilePage = () => {
                   e.currentTarget.style.boxShadow = 'none';
                   e.currentTarget.style.transform = 'translateY(0)';
                 }}
+                aria-disabled={isUploadDisabled}
+                title={isUploadDisabled ? 'Remove current image to upload a new one' : undefined}
               >
                 <UploadOutlined />
                 Upload Image
               </label>
+              {data?.data?.avatar && !avatarRemoved && (
+                <button
+                  type='button'
+                  onClick={handleRemoveAvatar}
+                  className='link-btn'
+                  style={{ color: '#ef4444', fontWeight: 800 }}
+                >
+                  <DeleteOutlined /> Remove current image
+                </button>
+              )}
             </Flex>
           </div>
 
