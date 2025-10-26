@@ -142,23 +142,49 @@ class ProductServices extends BaseServices<any> {
       session.startTransaction();
 
       const seller = await Seller.findById(payload.seller);
-      const product: any = await this.model.findByIdAndUpdate(id, { $inc: { stock: payload.stock } }, { session });
-
-      await Purchase.create(
-        [
-          {
-            user: userId,
-            seller: product.seller,
-            product: product._id,
-            sellerName: seller?.name,
-            productName: product.name,
-            quantity: Number(product.stock),
-            unitPrice: Number(product.price),
-            expense: Number(product.stock) * Number(product.price)
-          }
-        ],
-        { session }
+      const product: any = await this.model.findByIdAndUpdate(
+        id,
+        { $inc: { stock: payload.stock } },
+        { session, new: true }
       );
+
+      // Update existing purchase for this product (per user) by incrementing quantity and expense
+      const existingPurchase = await Purchase.findOne({ user: userId, product: product._id }).session(session);
+
+      const incrementExpense = Number(payload.stock) * Number(product.price);
+
+      if (existingPurchase) {
+        await Purchase.findOneAndUpdate(
+          { _id: existingPurchase._id },
+          {
+            $inc: { quantity: Number(payload.stock), expense: incrementExpense },
+            $set: {
+              seller: product.seller,
+              sellerName: seller?.name,
+              productName: product.name,
+              unitPrice: Number(product.price)
+            }
+          },
+          { session }
+        );
+      } else {
+        // Fallback: create if somehow missing, using only the increment (not total stock)
+        await Purchase.create(
+          [
+            {
+              user: userId,
+              seller: product.seller,
+              product: product._id,
+              sellerName: seller?.name,
+              productName: product.name,
+              quantity: Number(payload.stock),
+              unitPrice: Number(product.price),
+              expense: incrementExpense
+            }
+          ],
+          { session }
+        );
+      }
 
       await session.commitTransaction();
 

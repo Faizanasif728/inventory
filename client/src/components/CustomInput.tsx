@@ -9,6 +9,7 @@ interface Props {
   required?: boolean;
   defaultValue?: any;
   readOnly?: boolean;
+  min?: number;
 }
 
 const CustomInput = ({
@@ -20,6 +21,7 @@ const CustomInput = ({
   type = 'text',
   defaultValue,
   readOnly = false,
+  min,
 }: Props) => {
   return (
     <Row>
@@ -36,6 +38,7 @@ const CustomInput = ({
           defaultValue={defaultValue}
           {...register(name, { required: required })}
           readOnly={readOnly}
+          min={min}
           className={`input-field ${errors[name] ? 'input-field-error' : ''}`}
         />
       </Col>

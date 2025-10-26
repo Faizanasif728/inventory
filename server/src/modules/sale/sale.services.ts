@@ -17,6 +17,9 @@ class SaleServices extends BaseServices<any> {
    */
   async create(payload: any, userId: string) {
     const { productPrice, sellingPrice, quantity } = payload;
+    if (sellingPrice < productPrice) {
+      throw new CustomError(400, 'Selling price must be greater than or equal to price');
+    }
     payload.user = userId;
     // Store profit/margin per sale as totalPrice
     payload.totalPrice = (sellingPrice - productPrice) * quantity;

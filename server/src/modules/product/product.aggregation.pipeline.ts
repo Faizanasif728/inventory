@@ -35,6 +35,18 @@ const matchStagePipeline = (query: Record<string, unknown>, userId: string) => {
     }
   }
 
+  // stock status filter
+  if (query.stockStatus) {
+    const status = String(query.stockStatus);
+    if (status === 'out') {
+      fieldQuery.push({ stock: { $eq: 0 } });
+    } else if (status === 'low') {
+      fieldQuery.push({ $and: [{ stock: { $gt: 0 } }, { stock: { $lte: 5 } }] });
+    } else if (status === 'in') {
+      fieldQuery.push({ stock: { $gt: 5 } });
+    }
+  }
+
   return [
     {
       $match: {

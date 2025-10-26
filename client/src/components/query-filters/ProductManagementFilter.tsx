@@ -1,12 +1,12 @@
-import {Col, Flex, Row, Slider} from 'antd';
+import {Col, Flex, Row, Slider, Select} from 'antd';
 import React from 'react';
 import {useGetAllCategoriesQuery} from '../../redux/features/management/categoryApi';
 import {useGetAllBrandsQuery} from '../../redux/features/management/brandApi';
 
 interface ProductManagementFilterProps {
-  query: {name: string; category: string; brand: string; limit: number};
+  query: {name: string; category: string; brand: string; limit: number; stockStatus?: string};
   setQuery: React.Dispatch<
-    React.SetStateAction<{name: string; category: string; brand: string; limit: number}>
+    React.SetStateAction<{name: string; category: string; brand: string; limit: number; stockStatus?: string}>
   >;
 }
 
@@ -15,9 +15,9 @@ const ProductManagementFilter = ({query, setQuery}: ProductManagementFilterProps
   const {data: brands} = useGetAllBrandsQuery(undefined);
 
   return (
-    <Flex className='filter-bar'>
-      <Row gutter={2} style={{width: '100%'}}>
-        <Col xs={{span: 24}} md={{span: 8}}>
+    <Flex className='filter-bar' vertical>
+      <Row gutter={[16, 8]} style={{width: '100%'}}>
+        <Col xs={{span: 24}} lg={{span: 8}}>
           <label className='filter-label'>Price Range</label>
           <Slider
             range
@@ -33,7 +33,7 @@ const ProductManagementFilter = ({query, setQuery}: ProductManagementFilterProps
             }}
           />
         </Col>
-        <Col xs={{span: 24}} md={{span: 8}}>
+        <Col xs={{span: 24}} lg={{span: 8}}>
           <label className='filter-label'>Search by product name</label>
           <input
             type='text'
@@ -43,39 +43,50 @@ const ProductManagementFilter = ({query, setQuery}: ProductManagementFilterProps
             onChange={(e) => setQuery((prev) => ({...prev, name: e.target.value}))}
           />
         </Col>
-        <Col xs={{span: 24}} md={{span: 4}}>
-          <label className='filter-label'>Filter by Category</label>
-          <select
-            name='category'
-            className={`input-field`}
-            defaultValue={query.category}
-            onChange={(e) => setQuery((prev) => ({...prev, category: e.target.value}))}
-            onBlur={(e) => setQuery((prev) => ({...prev, category: e.target.value}))}
-          >
-            <option value=''>Filter by Category</option>
-            {categories?.data?.map((category: {_id: string; name: string}) => (
-              <option value={category._id} key={category._id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
+        <Col xs={{span: 24}} lg={{span: 8}}>
+          <label className='filter-label'>Stock Status</label>
+          <Select
+            className='filter-select'
+            allowClear
+            placeholder='All Stock'
+            value={query.stockStatus || undefined}
+            options={[
+              { value: 'in', label: 'In Stock' },
+              { value: 'low', label: 'Low Stock' },
+              { value: 'out', label: 'Out of Stock' },
+            ]}
+            onChange={(value) => setQuery((prev) => ({ ...prev, stockStatus: value || '' }))}
+          />
         </Col>
-        <Col xs={{span: 24}} md={{span: 4}}>
+      </Row>
+      <Row gutter={[16, 8]} style={{width: '100%', marginTop: '.25rem'}}>
+        <Col xs={{span: 24}} lg={{span: 12}}>
+          <label className='filter-label'>Filter by Category</label>
+          <Select
+            className='filter-select'
+            allowClear
+            placeholder='Filter by Category'
+            value={query.category || undefined}
+            options={categories?.data?.map((category: {_id: string; name: string}) => ({
+              value: category._id,
+              label: category.name,
+            }))}
+            onChange={(value) => setQuery((prev) => ({ ...prev, category: value || '' }))}
+          />
+        </Col>
+        <Col xs={{span: 24}} lg={{span: 12}}>
           <label className='filter-label'>Filter by Brand</label>
-          <select
-            name='Brand'
-            className={`input-field`}
-            defaultValue={query.brand}
-            onChange={(e) => setQuery((prev) => ({...prev, brand: e.target.value}))}
-            onBlur={(e) => setQuery((prev) => ({...prev, brand: e.target.value}))}
-          >
-            <option value=''>Filter by Brand</option>
-            {brands?.data?.map((brand: {_id: string; name: string}) => (
-              <option value={brand._id} key={brand._id}>
-                {brand.name}
-              </option>
-            ))}
-          </select>
+          <Select
+            className='filter-select'
+            allowClear
+            placeholder='Filter by Brand'
+            value={query.brand || undefined}
+            options={brands?.data?.map((brand: {_id: string; name: string}) => ({
+              value: brand._id,
+              label: brand.name,
+            }))}
+            onChange={(value) => setQuery((prev) => ({ ...prev, brand: value || '' }))}
+          />
         </Col>
       </Row>
     </Flex>

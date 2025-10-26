@@ -1,14 +1,19 @@
 import { z } from 'zod';
 
-const createSchema = z.object({
-  product: z.string(),
-  productName: z.string(),
-  quantity: z.number().min(1, { message: 'Must be equal or grater than 1' }),
-  productPrice: z.number().min(1, { message: 'Must be equal or grater than 1' }),
-  sellingPrice: z.number().min(1, { message: 'Must be equal or grater than 1' }),
-  buyerName: z.string(),
-  date: z.string()
-});
+const createSchema = z
+  .object({
+    product: z.string(),
+    productName: z.string(),
+    quantity: z.number().min(1, { message: 'Must be equal or grater than 1' }),
+    productPrice: z.number().min(1, { message: 'Must be equal or grater than 1' }),
+    sellingPrice: z.number().min(1, { message: 'Must be equal or grater than 1' }),
+    buyerName: z.string(),
+    date: z.string()
+  })
+  .refine((data) => data.sellingPrice >= data.productPrice, {
+    message: 'Selling price must be greater than or equal to price',
+    path: ['sellingPrice']
+  });
 
 const updateSchema = z.object({
   product: z.string().optional(),

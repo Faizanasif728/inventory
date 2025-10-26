@@ -6,9 +6,10 @@ interface Props {
   type?: string;
   handleChange: any;
   defaultValue?: any;
+  min?: number;
 }
 
-const ModalInput = ({ name, label, handleChange, defaultValue = '', type = 'text' }: Props) => {
+const ModalInput = ({ name, label, handleChange, defaultValue = '', type = 'text', min }: Props) => {
   return (
     <Row>
       <Col span={6}>
@@ -24,6 +25,7 @@ const ModalInput = ({ name, label, handleChange, defaultValue = '', type = 'text
           value={defaultValue}
           placeholder={label}
           onChange={handleChange}
+          min={min}
           className={`input-field`}
         />
       </Col>

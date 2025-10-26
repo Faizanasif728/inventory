@@ -80,6 +80,17 @@ const ProductManagePage = () => {
       align: 'center',
     },
     {
+      title: 'Stock Status',
+      key: 'stockStatus',
+      dataIndex: 'stock',
+      align: 'center',
+      render: (stock: number) => {
+        if (stock === 0) return <Tag color='red'>OUT OF STOCK</Tag>;
+        if (stock <= 5) return <Tag color='gold'>LOW STOCK</Tag>;
+        return <Tag color='green'>IN STOCK</Tag>;
+      },
+    },
+    {
       title: 'Purchase From',
       key: 'sellerName',
       dataIndex: 'sellerName',
@@ -157,6 +168,10 @@ const SellProductModal = ({ product }: { product: IProduct & { key: string } }) 
       buyerName: data.buyerName,
       date: data.date,
     };
+    if (payload.sellingPrice < payload.productPrice) {
+      toastMessage({ icon: 'error', text: 'Selling price must be greater than or equal to price' });
+      return;
+    }
     try {
       const res = await saleProduct(payload).unwrap();
       if (res.statusCode === 201) {
@@ -208,6 +223,7 @@ const SellProductModal = ({ product }: { product: IProduct & { key: string } }) 
             register={register}
             type='number'
             required={true}
+            min={product.price}
           />
           <CustomInput
             name='buyerName'

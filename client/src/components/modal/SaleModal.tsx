@@ -28,6 +28,11 @@ const SaleModal = () => {
       quantity: Number(updateDate?.quantity),
     };
 
+    if (payload.sellingPrice < (payload.productPrice as number)) {
+      toastMessage({ icon: 'error', text: 'Selling price must be greater than or equal to price' });
+      return;
+    }
+
     try {
       const res = await createNewSale(payload).unwrap();
 
@@ -75,6 +80,7 @@ const SaleModal = () => {
             type='number'
             name='sellingPrice'
             defaultValue={updateDate?.sellingPrice}
+            min={data?.price}
           />
           <ModalInput
             handleChange={handleChange}

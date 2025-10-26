@@ -356,7 +356,7 @@ li.ant-menu-item {
   border-radius: 1rem;
   background: transparent; /* no extra bg */
   box-shadow: none; /* no inset shadow */
-  border: 1px solid #4F034155; /* subtle Tyrian outline for structure */
+  border: none; /* remove black/visible outline */
 }
 
 .filter-label {
@@ -370,11 +370,80 @@ li.ant-menu-item {
   background-color: #4F0341;
 }
 .filter-bar .ant-slider .ant-slider-handle::after {
-  box-shadow: 0 0 0 2px #4F0341;
+  box-shadow: none; /* no glow */
   border: 2px solid #4F0341;
 }
 .filter-bar .ant-slider:hover .ant-slider-track {
   background-color: #4F0341;
+}
+
+/* Filter controls: no heavy borders, no shadows, transparent bg */
+.filter-bar .input-field {
+  background: transparent;
+  border: 1px solid rgba(79, 3, 65, 0.28);
+  box-shadow: none;
+}
+.filter-bar .input-field:focus {
+  border-color: #4F0341;
+  box-shadow: none;
+}
+.filter-bar select.input-field {
+  background-color: transparent;
+}
+
+/* Dropdown palette styles (replace default blue highlights) */
+.filter-bar select.input-field,
+.filter-bar .filter-select .ant-select-selector {
+  color: #111;
+  border-color: rgba(79, 3, 65, 0.28) !important;
+  background: transparent !important;
+  border-radius: 10px !important;
+}
+.filter-bar select.input-field:hover,
+.filter-bar .filter-select:hover .ant-select-selector {
+  border-color: #4F0341;
+}
+.filter-bar select.input-field:focus,
+.filter-bar select.input-field:focus-visible,
+.filter-bar .filter-select.ant-select-focused .ant-select-selector,
+.filter-bar .filter-select .ant-select-selector:focus,
+.filter-bar .filter-select .ant-select-selector:focus-visible {
+  outline: none;
+  border-color: #4F0341 !important;
+  box-shadow: none !important;
+}
+.filter-bar select.input-field option,
+.filter-bar .filter-select .ant-select-item {
+  background: #ffffff;
+  color: #111;
+}
+.filter-bar select.input-field option:checked,
+.filter-bar select.input-field option:hover,
+.filter-bar select.input-field option:focus,
+.filter-bar .filter-select .ant-select-item-option-active,
+.filter-bar .filter-select .ant-select-item-option-selected {
+  background-color: rgba(79, 3, 65, 0.12);
+  color: #4F0341;
+}
+
+/* Remove default blue focus ring on Ant Select dropdown */
+.filter-bar .filter-select .ant-select-selection-placeholder,
+.filter-bar .filter-select .ant-select-selection-item {
+  color: #6b6b6b;
+}
+
+/* Ensure all filter controls align and stretch equally */
+.filter-bar .ant-row {
+  align-items: end;
+}
+.filter-bar .ant-col {
+  display: flex;
+  flex-direction: column;
+}
+.filter-bar .ant-col > .input-field,
+.filter-bar .ant-col > .ant-slider,
+.filter-bar .ant-col > select.input-field {
+  width: 100% !important;
 }
 
 /* Ant Table on purple background: remove white content bg */
@@ -504,6 +573,7 @@ li.ant-menu-item {
   font-weight: 800 !important;
   letter-spacing: .02em;
   color: #fff !important;
+  box-shadow: none !important; /* keep flat look */
 }
 
 .action-btn-small {
@@ -518,14 +588,14 @@ li.ant-menu-item {
   border: none !important;
 }
 
-.btn-sell { background-color: #7c3aed !important; }
-.btn-sell:hover { background-color: #6d28d9 !important; }
+.btn-sell { background-color: #4F0341 !important; }
+.btn-sell:hover { background-color: #3b0232 !important; }
 
-.btn-stock { background-color: #2563eb !important; }
-.btn-stock:hover { background-color: #1d4ed8 !important; }
+.btn-stock { background-color: #6d1b5b !important; }
+.btn-stock:hover { background-color: #5c164d !important; }
 
-.btn-edit { background-color: #16a34a !important; }
-.btn-edit:hover { background-color: #15803d !important; }
+.btn-edit { background-color: #8b2f72 !important; }
+.btn-edit:hover { background-color: #7a295f !important; }
 
 .btn-delete { background-color: #ef4444 !important; }
 .btn-delete:hover { background-color: #dc2626 !important; }

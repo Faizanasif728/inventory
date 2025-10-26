@@ -31,7 +31,7 @@ const productApi = baseApi.injectEndpoints({
         method: 'POST',
         body: payload,
       }),
-      invalidatesTags: ['product']
+      invalidatesTags: ['product', 'purchases']
     }),
     addStock: builder.mutation({
       query: ({ id, payload }) => ({
@@ -39,7 +39,7 @@ const productApi = baseApi.injectEndpoints({
         method: 'PATCH',
         body: payload,
       }),
-      invalidatesTags: ['product']
+      invalidatesTags: ['product', 'purchases']
     }),
     deleteProduct: builder.mutation({
       query: (id) => ({
