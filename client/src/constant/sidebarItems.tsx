@@ -9,6 +9,7 @@ import {
   AppstoreOutlined,
   TagsOutlined,
   HistoryOutlined,
+  PlusCircleOutlined,
 } from '@ant-design/icons';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
@@ -63,6 +64,16 @@ export const sidebarItems = [
     key: 'Manage Brands',
     label: <NavLink to='/brands'>MANAGE BRANDS</NavLink>,
     icon: React.createElement(TagsOutlined),
+  },
+  {
+    key: 'Add Loan',
+    label: <NavLink to='/add-loan'>ADD LOAN</NavLink>,
+    icon: React.createElement(PlusCircleOutlined),
+  },
+  {
+    key: 'Manage Loans',
+    label: <NavLink to='/loans'>MANAGE LOANS</NavLink>,
+    icon: React.createElement(HistoryOutlined),
   },
   // {
   //   key: 'Sales History',

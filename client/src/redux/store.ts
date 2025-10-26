@@ -13,6 +13,7 @@ import {
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import modalSlice from './services/modal.Slice';
+import loansReducer from './services/loans.slice';
 
 const persistConfig = {
   key: 'auth',
@@ -21,10 +22,18 @@ const persistConfig = {
 
 const persistedAuthReducer = persistReducer(persistConfig, authReducer)
 
+const loansPersistConfig = {
+  key: 'loans',
+  storage,
+}
+
+const persistedLoansReducer = persistReducer(loansPersistConfig, loansReducer)
+
 export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
     modal: modalSlice,
+    loans: persistedLoansReducer,
     [baseApi.reducerPath]: baseApi.reducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
