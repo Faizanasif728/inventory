@@ -283,21 +283,24 @@ li.ant-menu-item {
 
 .app-sidebar-menu .ant-menu-item a,
 .app-sidebar-menu .ant-menu-title-content {
-  color: #000 !important; /* default black */
+  color: #000 !important;
   font-weight: 700;
-  font-size: 0.95rem; /* balanced sidebar label size */
+  font-size: 0.9rem;        /* slightly smaller, more compact */
   line-height: 1.2;
+  letter-spacing: 0.015em;
 }
 
 /* Sidebar menu visual adjustments: alignment, spacing, and icon sizing */
 .app-sidebar-menu .ant-menu-item {
-  margin: 0 6px !important;
-  border-radius: 10px !important;
-  padding: 6px 10px !important;
+  margin: 0 !important;            /* remove extra gap between items */
+  padding: 6px 10px !important;    /* slightly more compact */
+  line-height: 1.2 !important;     /* tighter but still readable */
+  height: auto !important;         /* let height be natural */
+  min-height: auto !important;     /* remove min-height constraint */
 }
 .app-sidebar-menu .ant-menu-item .ant-menu-item-icon {
-  font-size: 16px !important;
-  width: 20px !important; /* equalize icon width for alignment */
+  font-size: 12px !important;
+  width: 15px !important; /* equalize icon width for alignment */
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -305,7 +308,7 @@ li.ant-menu-item {
 .app-sidebar-menu .ant-menu-title-content > a {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 15px;
   letter-spacing: .02em;
 }
 
