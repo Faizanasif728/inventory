@@ -10,8 +10,9 @@ export default {
   jwt_secret: process.env.JWT_SECRET,
   production_frontend_url: process.env.PRODUCTION_FRONTEND_URL,
   local_frontend_url: process.env.LOCAL_FRONTEND_URL || 'http://localhost:5173',
-  cors_origin: (process.env.NODE_ENV === 'production' 
-    ? [process.env.PRODUCTION_FRONTEND_URL]
-    : [process.env.LOCAL_FRONTEND_URL || 'http://localhost:5173', 'http://localhost:3000']
-  ).filter(Boolean) as string[]
+  cors_origin: [
+    process.env.PRODUCTION_FRONTEND_URL,
+    process.env.LOCAL_FRONTEND_URL || 'http://localhost:5173',
+    'http://localhost:3000'
+  ].filter(Boolean) as string[]
 };
