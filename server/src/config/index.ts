@@ -16,3 +16,6 @@ export default {
     'http://localhost:3000'
   ].filter(Boolean) as string[]
 };
+
+// eslint-disable-next-line no-console
+console.log('[IMS][SERVER CONFIG] CORS origins:', JSON.stringify((exports as any).default?.cors_origin ?? []));

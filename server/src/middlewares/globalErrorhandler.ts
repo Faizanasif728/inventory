@@ -20,7 +20,8 @@ const globalErrorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
     stack: config.nodeEnv === 'dev' ? err.stack : null
   };
 
-  // console.log(err);
+  // eslint-disable-next-line no-console
+  console.error('[IMS][SERVER ERROR]', err?.message, err?.name, err);
 
   if (err instanceof ZodError) {
     const errors = zodErrorSanitize(err);

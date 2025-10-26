@@ -19,6 +19,16 @@ const baseQuery = fetchBaseQuery({
 const customBaseQuery: BaseQueryFn<FetchArgs, BaseQueryApi, DefinitionType> = async (args, api, extraOptions): Promise<any> => {
   const result = await baseQuery(args, api, extraOptions)
 
+  // Debug failed requests centrally
+  if (result?.error) {
+    // eslint-disable-next-line no-console
+    console.error('[IMS][API ERROR]', {
+      url: typeof args === 'string' ? args : args.url,
+      status: (result.error as any)?.status,
+      data: (result.error as any)?.data
+    })
+  }
+
   if (result?.error?.status === 401) {
     window.location.href = '/login'
     api.dispatch(logoutUser())

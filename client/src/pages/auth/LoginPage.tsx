@@ -25,6 +25,8 @@ const LoginPage = () => {
 
   const onSubmit = async (data: FieldValues) => {
     try {
+      // eslint-disable-next-line no-console
+      console.log('[IMS][LOGIN] submitting', { email: data?.email });
       const res = await userLogin(data).unwrap();
 
       if (res.statusCode === 200) {
@@ -34,6 +36,8 @@ const LoginPage = () => {
         toastMessage({ icon: 'success', text: 'Successfully Login!' });
       }
     } catch (error: any) {
+      // eslint-disable-next-line no-console
+      console.error('[IMS][LOGIN] failed', error);
       toastMessage({ icon: 'error', text: error.data.message });
     }
   };

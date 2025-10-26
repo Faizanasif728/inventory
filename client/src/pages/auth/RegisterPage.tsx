@@ -32,6 +32,8 @@ const RegisterPage = () => {
         return;
       }
 
+      // eslint-disable-next-line no-console
+      console.log('[IMS][REGISTER] submitting', { email: data?.email });
       const res = await userRegistration(data).unwrap();
 
       if (res.statusCode === 201) {
@@ -42,6 +44,8 @@ const RegisterPage = () => {
         toastMessage({ icon: 'success', text: res.message });
       }
     } catch (error: any) {
+      // eslint-disable-next-line no-console
+      console.error('[IMS][REGISTER] failed', error);
       const errMsg =
         error?.data?.errors?.[Object.keys(error?.data?.errors)[0]] || error.data.message;
       toastMessage({ icon: 'error', text: errMsg });

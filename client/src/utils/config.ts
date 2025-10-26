@@ -11,3 +11,18 @@ export const config = {
     uploadPreset: import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET
   }
 };
+
+// Minimal runtime diagnostics for environment resolution
+if (typeof window !== 'undefined') {
+  try {
+    // Do not log secrets; only show mode and resolved API URL
+    // Helps detect wrong env var names like VITE_PRODUCTION_BACKEND_URL
+    // or missing values on Render
+    // eslint-disable-next-line no-console
+    console.log('[IMS][CONFIG] MODE:', import.meta.env.MODE, 'BaseURL:', config.baseUrl);
+    if (!config.baseUrl) {
+      // eslint-disable-next-line no-console
+      console.error('[IMS][CONFIG] baseUrl is empty. Set VITE_PRODUCTION_BACKEND_URL or VITE_BASE_URL.');
+    }
+  } catch {}
+}

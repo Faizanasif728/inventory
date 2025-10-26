@@ -18,6 +18,8 @@ app.use(cors({
 
 // Root health check route
 app.get('/', (_req, res) => {
+  // eslint-disable-next-line no-console
+  console.log('[IMS][SERVER] Root / hit');
   res.status(200).json({
     message: '✅ Inventory Management System Backend is running...',
     status: 'Server Active',
@@ -28,6 +30,8 @@ app.get('/', (_req, res) => {
 
 // Health check endpoint
 app.get('/health', (_req, res) => {
+  // eslint-disable-next-line no-console
+  console.log('[IMS][SERVER] /health hit');
   res.status(200).json({
     success: true,
     message: '✅ Backend is running successfully!',
