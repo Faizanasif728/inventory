@@ -1,5 +1,7 @@
-import { Button, Col, Flex, Row } from 'antd';
-import { FieldValues, useForm } from 'react-hook-form';
+import { Button, Col, Flex, Row, Select } from 'antd';
+import { ArrowLeftOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
+import { FieldValues, useForm, Controller } from 'react-hook-form';
 import { useState } from 'react';
 import CustomInput from '../components/CustomInput';
 import toastMessage from '../lib/toastMessage';
@@ -14,6 +16,7 @@ import CreateBrandModal from '../components/modal/CreateBrandModal';
 import { SpinnerIcon } from '@phosphor-icons/react';
 
 const CreateProduct = () => {
+  const navigate = useNavigate();
   const [isCreateCategoryOpen, setIsCreateCategoryOpen] = useState(false);
   const [isCreateBrandOpen, setIsCreateBrandOpen] = useState(false);
   const [createNewProduct, { isLoading: isCreatingProduct }] = useCreateNewProductMutation();
@@ -26,6 +29,7 @@ const CreateProduct = () => {
     register,
     formState: { errors },
     reset,
+    control,
   } = useForm();
 
   const onSubmit = async (data: FieldValues) => {
@@ -50,6 +54,12 @@ const CreateProduct = () => {
 
   return (
     <>
+      <div style={{ padding: '0 clamp(0.5rem, 2vw, 1rem)', marginBottom: '.75rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <h1 style={{ color: '#4F0341', fontWeight: 900, fontSize: 'clamp(1.25rem, 4vw, 1.75rem)', letterSpacing: '.04em', textTransform: 'uppercase', margin: 0 }}>Add Product</h1>
+        <Button type='default' onClick={() => navigate(-1)} className='btn-go-back' style={{ borderRadius: '9999px', fontWeight: 800 }}>
+          <ArrowLeftOutlined /> Go Back
+        </Button>
+      </div>
       <Row gutter={30}>
         <Col
           xs={{ span: 24 }}
@@ -69,17 +79,7 @@ const CreateProduct = () => {
               boxShadow: 'none'
             }}
           >
-            <h1
-              style={{
-                marginBottom: '.8rem',
-                fontWeight: '900',
-                textAlign: 'center',
-                textTransform: 'uppercase',
-                color: '#4F0341',
-              }}
-            >
-              Add New Product
-            </h1>
+            
             <form onSubmit={handleSubmit(onSubmit)}>
               <CustomInput
                 name='name'
@@ -111,15 +111,23 @@ const CreateProduct = () => {
                   </label>
                 </Col>
                 <Col xs={{ span: 23 }} lg={{ span: 18 }}>
-                  <select
-                    {...register('seller', { required: true })}
-                    className={`input-field ${errors['seller'] ? 'input-field-error' : ''}`}
-                  >
-                    <option value=''>Select Seller*</option>
-                    {sellers?.data.map((item: ICategory) => (
-                      <option value={item._id}>{item.name}</option>
-                    ))}
-                  </select>
+                  <Controller
+                    name='seller'
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field }) => (
+                      <Select
+                        {...field}
+                        placeholder='Select Seller*'
+                        className='filter-select'
+                        style={{ width: '100%' }}
+                        options={sellers?.data.map((item: ICategory) => ({
+                          value: item._id,
+                          label: item.name,
+                        }))}
+                      />
+                    )}
+                  />
                 </Col>
               </Row>
 
@@ -130,15 +138,23 @@ const CreateProduct = () => {
                   </label>
                 </Col>
                 <Col xs={{ span: 23 }} lg={{ span: 18 }}>
-                  <select
-                    {...register('category', { required: true })}
-                    className={`input-field ${errors['category'] ? 'input-field-error' : ''}`}
-                  >
-                    <option value=''>Select Category*</option>
-                    {categories?.data.map((item: ICategory) => (
-                      <option value={item._id}>{item.name}</option>
-                    ))}
-                  </select>
+                  <Controller
+                    name='category'
+                    control={control}
+                    rules={{ required: true }}
+                    render={({ field }) => (
+                      <Select
+                        {...field}
+                        placeholder='Select Category*'
+                        className='filter-select'
+                        style={{ width: '100%' }}
+                        options={categories?.data.map((item: ICategory) => ({
+                          value: item._id,
+                          label: item.name,
+                        }))}
+                      />
+                    )}
+                  />
                 </Col>
               </Row>
 
@@ -149,15 +165,23 @@ const CreateProduct = () => {
                   </label>
                 </Col>
                 <Col xs={{ span: 23 }} lg={{ span: 18 }}>
-                  <select
-                    {...register('brand')}
-                    className={`input-field ${errors['brand'] ? 'input-field-error' : ''}`}
-                  >
-                    <option value=''>Select brand</option>
-                    {brands?.data.map((item: ICategory) => (
-                      <option value={item._id}>{item.name}</option>
-                    ))}
-                  </select>
+                  <Controller
+                    name='brand'
+                    control={control}
+                    render={({ field }) => (
+                      <Select
+                        {...field}
+                        placeholder='Select brand'
+                        className='filter-select'
+                        style={{ width: '100%' }}
+                        allowClear
+                        options={brands?.data.map((item: ICategory) => ({
+                          value: item._id,
+                          label: item.name,
+                        }))}
+                      />
+                    )}
+                  />
                 </Col>
               </Row>
 
@@ -170,12 +194,24 @@ const CreateProduct = () => {
                   </label>
                 </Col>
                 <Col xs={{ span: 23 }} lg={{ span: 18 }}>
-                  <select className={`input-field`} {...register('size')}>
-                    <option value=''>Select Product Size</option>
-                    <option value='SMALL'>Small</option>
-                    <option value='MEDIUM'>Medium</option>
-                    <option value='LARGE'>Large</option>
-                  </select>
+                  <Controller
+                    name='size'
+                    control={control}
+                    render={({ field }) => (
+                      <Select
+                        {...field}
+                        placeholder='Select Product Size'
+                        className='filter-select'
+                        style={{ width: '100%' }}
+                        allowClear
+                        options={[
+                          { value: 'SMALL', label: 'Small' },
+                          { value: 'MEDIUM', label: 'Medium' },
+                          { value: 'LARGE', label: 'Large' },
+                        ]}
+                      />
+                    )}
+                  />
                 </Col>
               </Row>
               <Flex justify='center'>

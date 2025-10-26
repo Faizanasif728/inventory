@@ -72,7 +72,8 @@ const EditProfilePage = () => {
           <Button 
             type='default' 
             onClick={() => navigate('/profile')}
-            style={{ borderRadius: '9999px', fontWeight: 800 }}
+          className='btn-go-back'
+          style={{ borderRadius: '9999px', fontWeight: 800 }}
           >
             <ArrowLeftOutlined /> Go Back
           </Button>
@@ -240,6 +241,7 @@ const EditProfileForm = ({ data }: { data: any }) => {
         </Button>
         <Button
           onClick={() => navigate('/profile')}
+          className='btn-cancel'
           style={{ 
             borderRadius: '9999px',
             fontWeight: 800,

@@ -41,7 +41,7 @@ const CreateSellerModal = ({ openModal, setOpenModal }: CreateSellerModalProps) 
         onOk={() => setOpenModal(false)}
         onCancel={() => setOpenModal(false)}
         footer={[
-          <Button key='back' onClick={() => setOpenModal(false)}>
+          <Button key='back' onClick={() => setOpenModal(false)} className='btn-cancel'>
             Close
           </Button>,
         ]}

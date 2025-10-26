@@ -72,6 +72,7 @@ const ChangePasswordPage = () => {
           <Button 
             type='default' 
             onClick={() => navigate('/profile')}
+            className='btn-go-back'
             style={{ borderRadius: '9999px', fontWeight: 800 }}
           >
             <ArrowLeftOutlined /> Go Back
@@ -228,6 +229,7 @@ const ChangePasswordPage = () => {
                   </Button>
                   <Button
                     onClick={() => navigate('/profile')}
+                    className='btn-cancel'
                     style={{
                       flex: 1,
                       minWidth: '120px',

@@ -1,8 +1,10 @@
 import { DeleteFilled, EditFilled } from '@ant-design/icons';
 import type { PaginationProps, TableColumnsType } from 'antd';
-import { Button, Col, Flex, Modal, Pagination, Row, Table, Tag } from 'antd';
+import { Button, Col, Flex, Modal, Pagination, Row, Table, Tag, Select } from 'antd';
+import { ArrowLeftOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { FieldValues, useForm } from 'react-hook-form';
+import { FieldValues, useForm, Controller } from 'react-hook-form';
 import {
   useAddStockMutation,
   useDeleteProductMutation,
@@ -29,6 +31,7 @@ const ProductManagePage = () => {
   });
 
   const { data: products, isFetching } = useGetAllProductsQuery(query);
+  const navigate = useNavigate();
 
   const onChange: PaginationProps['onChange'] = (page) => {
     setCurrent(page);
@@ -120,6 +123,12 @@ const ProductManagePage = () => {
 
   return (
     <>
+      <div style={{ padding: '0 clamp(0.5rem, 2vw, 1rem)', marginBottom: '.75rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <h1 style={{ color: '#4F0341', fontWeight: 900, fontSize: 'clamp(1.25rem, 4vw, 1.75rem)', letterSpacing: '.04em', textTransform: 'uppercase', margin: 0 }}>Manage Products</h1>
+        <Button type='default' onClick={() => navigate(-1)} className='btn-go-back' style={{ borderRadius: '9999px', fontWeight: 800 }}>
+          <ArrowLeftOutlined /> Go Back
+        </Button>
+      </div>
       <ProductManagementFilter query={query} setQuery={setQuery} />
       <Table
         size='small'
@@ -250,7 +259,7 @@ const SellProductModal = ({ product }: { product: IProduct & { key: string } }) 
             type='number'
           />
           <Flex justify='center' style={{ marginTop: '1rem' }}>
-            <Button htmlType='submit' type='primary' disabled={isLoading}>
+            <Button htmlType='submit' type='primary' disabled={isLoading} className='btn-primary-purple' style={{ textTransform: 'uppercase', fontWeight: 'bold' }}>
               {isLoading && <SpinnerIcon className='spin' weight='bold' />}
               Sell Product
             </Button>
@@ -309,7 +318,7 @@ const AddStockModal = ({ product }: { product: IProduct & { key: string } }) => 
         <form onSubmit={handleSubmit(onSubmit)} style={{ margin: '2rem' }}>
           <CustomInput name='stock' label='Add Stock' register={register} type='number' />
           <Flex justify='center' style={{ marginTop: '1rem' }}>
-            <Button htmlType='submit' type='primary' disabled={isLoading}>
+            <Button htmlType='submit' type='primary' disabled={isLoading} className='btn-primary-purple' style={{ textTransform: 'uppercase', fontWeight: 'bold' }}>
               {isLoading && <SpinnerIcon className='spin' weight='bold' />}
               Submit
             </Button>
@@ -334,6 +343,7 @@ const UpdateProductModal = ({ product }: { product: IProduct & { key: string } }
     register,
     formState: { errors },
     reset,
+    control,
   } = useForm({
     defaultValues: {
       name: product.name,
@@ -402,18 +412,24 @@ const UpdateProductModal = ({ product }: { product: IProduct & { key: string } }
               </label>
             </Col>
             <Col xs={{ span: 23 }} lg={{ span: 18 }}>
-              <select
-                disabled={isSellerLoading}
-                {...register('seller', { required: true })}
-                className={`input-field ${errors['seller'] ? 'input-field-error' : ''}`}
-              >
-                <option value=''>Select Seller*</option>
-                {sellers?.data.map((item: ICategory) => (
-                  <option value={item._id} key={item._id}>
-                    {item.name}
-                  </option>
-                ))}
-              </select>
+              <Controller
+                name='seller'
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    disabled={isSellerLoading}
+                    className='filter-select'
+                    placeholder='Select Seller*'
+                    style={{ width: '100%' }}
+                    options={sellers?.data.map((item: ICategory) => ({
+                      value: item._id,
+                      label: item.name,
+                    }))}
+                  />
+                )}
+              />
             </Col>
           </Row>
 
@@ -424,17 +440,23 @@ const UpdateProductModal = ({ product }: { product: IProduct & { key: string } }
               </label>
             </Col>
             <Col xs={{ span: 23 }} lg={{ span: 18 }}>
-              <select
-                {...register('category', { required: true })}
-                className={`input-field ${errors['category'] ? 'input-field-error' : ''}`}
-              >
-                <option value=''>Select Category*</option>
-                {categories?.data.map((item: ICategory) => (
-                  <option value={item._id} key={item._id}>
-                    {item.name}
-                  </option>
-                ))}
-              </select>
+              <Controller
+                name='category'
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    className='filter-select'
+                    placeholder='Select Category*'
+                    style={{ width: '100%' }}
+                    options={categories?.data.map((item: ICategory) => ({
+                      value: item._id,
+                      label: item.name,
+                    }))}
+                  />
+                )}
+              />
             </Col>
           </Row>
 
@@ -445,17 +467,23 @@ const UpdateProductModal = ({ product }: { product: IProduct & { key: string } }
               </label>
             </Col>
             <Col xs={{ span: 23 }} lg={{ span: 18 }}>
-              <select
-                {...register('brand')}
-                className={`input-field ${errors['brand'] ? 'input-field-error' : ''}`}
-              >
-                <option value=''>Select brand</option>
-                {brands?.data.map((item: ICategory) => (
-                  <option value={item._id} key={item._id}>
-                    {item.name}
-                  </option>
-                ))}
-              </select>
+              <Controller
+                name='brand'
+                control={control}
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    allowClear
+                    className='filter-select'
+                    placeholder='Select brand'
+                    style={{ width: '100%' }}
+                    options={brands?.data.map((item: ICategory) => ({
+                      value: item._id,
+                      label: item.name,
+                    }))}
+                  />
+                )}
+              />
             </Col>
           </Row>
 
@@ -468,18 +496,31 @@ const UpdateProductModal = ({ product }: { product: IProduct & { key: string } }
               </label>
             </Col>
             <Col xs={{ span: 23 }} lg={{ span: 18 }}>
-              <select className={`input-field`} {...register('size')}>
-                <option value=''>Select Product Size</option>
-                <option value='SMALL'>Small</option>
-                <option value='MEDIUM'>Medium</option>
-                <option value='LARGE'>Large</option>
-              </select>
+              <Controller
+                name='size'
+                control={control}
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    allowClear
+                    className='filter-select'
+                    placeholder='Select Product Size'
+                    style={{ width: '100%' }}
+                    options={[
+                      { value: 'SMALL', label: 'Small' },
+                      { value: 'MEDIUM', label: 'Medium' },
+                      { value: 'LARGE', label: 'Large' },
+                    ]}
+                  />
+                )}
+              />
             </Col>
           </Row>
           <Flex justify='center'>
             <Button
               htmlType='submit'
               type='primary'
+              className='btn-primary-purple'
               style={{ textTransform: 'uppercase', fontWeight: 'bold' }}
             >
               Update

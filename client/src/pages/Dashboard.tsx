@@ -1,10 +1,12 @@
-import { Col, Row } from 'antd';
+import { Button, Col, Row } from 'antd';
 import MonthlyChart from '../components/Charts/MonthlyChart';
 import Loader from '../components/Loader';
 import { useCountProductsQuery } from '../redux/features/management/productApi';
 import { useYearlySaleQuery } from '../redux/features/management/saleApi';
 import { useYearlyExpenseQuery, useTotalPurchasedQuantityQuery } from '../redux/features/management/purchaseApi';
 import DailyChart from '../components/Charts/DailyChart';
+import { ArrowLeftOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
   const { data: products, isLoading } = useCountProductsQuery(undefined);
@@ -12,10 +14,17 @@ const Dashboard = () => {
   const { data: yearlyExpense } = useYearlyExpenseQuery(undefined);
   const { data: purchasedTotal } = useTotalPurchasedQuantityQuery();
 
+  const navigate = useNavigate();
   if (isLoading && isLoading1) return <Loader />;
   else
     return (
       <>
+        <div style={{ padding: '0 clamp(0.5rem, 2vw, 1rem)', marginBottom: '.75rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <h1 style={{ color: '#4F0341', fontWeight: 900, fontSize: 'clamp(1.25rem, 4vw, 1.75rem)', letterSpacing: '.04em', textTransform: 'uppercase', margin: 0 }}>Dashboard</h1>
+          <Button type='default' onClick={() => navigate(-1)} className='btn-go-back' style={{ borderRadius: '9999px', fontWeight: 800 }}>
+            <ArrowLeftOutlined /> Go Back
+          </Button>
+        </div>
         <Row style={{ paddingRight: '1rem' }}>
           <Col xs={{ span: 24 }} lg={{ span: 8 }} style={{ padding: '.5rem' }}>
             <div className='number-card'>

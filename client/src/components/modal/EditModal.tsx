@@ -1,4 +1,4 @@
-import { Button, Col, Flex, Modal, Row } from 'antd';
+import { Button, Col, Flex, Modal, Row, Select } from 'antd';
 import { ChangeEvent, useEffect, useState } from 'react';
 import toastMessage from '../../lib/toastMessage';
 import { useUpdateProductMutation } from '../../redux/features/management/productApi';
@@ -81,22 +81,23 @@ const EditModal = () => {
               </label>
             </Col>
             <Col span={18}>
-              <select
-                name='size'
-                defaultValue={updateDate?.size}
-                value={updateDate?.size}
-                onChange={handleChange}
-                className={`input-field`}
-              >
-                <option value=''>Select Product Size*</option>
-                <option value='SMALL'>Small</option>
-                <option value='MEDIUM'>Medium</option>
-                <option value='LARGE'>Large</option>
-              </select>
+              <Select
+                className='filter-select'
+                placeholder='Select Product Size*'
+                style={{ width: '100%' }}
+                allowClear
+                value={updateDate?.size || undefined}
+                onChange={(value) => setUpdateDate((prev) => ({ ...prev, size: value }))}
+                options={[
+                  { value: 'SMALL', label: 'Small' },
+                  { value: 'MEDIUM', label: 'Medium' },
+                  { value: 'LARGE', label: 'Large' },
+                ]}
+              />
             </Col>
           </Row>
           <Flex justify='center' style={{ margin: '1rem' }}>
-            <Button key='submit' type='primary' onClick={onSubmit}>
+            <Button key='submit' type='primary' onClick={onSubmit} className='btn-primary-purple' style={{ textTransform: 'uppercase', fontWeight: 'bold' }}>
               Update
             </Button>
           </Flex>

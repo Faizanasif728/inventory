@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Outlet, useNavigate, NavLink} from 'react-router-dom';
+import {Outlet, useNavigate, NavLink, useLocation} from 'react-router-dom';
 import {Button, Drawer, Layout, Menu} from 'antd';
 import {LogoutOutlined, MenuOutlined, CloseOutlined} from '@ant-design/icons';
 import {sidebarItems} from '../../constant/sidebarItems';
@@ -16,6 +16,7 @@ const Sidebar = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const { data } = useGetSelfProfileQuery(undefined);
 
   const handleLogout = () => {
@@ -53,6 +54,9 @@ const Sidebar = () => {
         <img src={logo} alt='IMS Logo' style={{height: 40}} />
         <div className='top-nav-links' style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
           <NavLink to='/' style={{ color: '#4F0341', fontWeight: 800, fontSize: 18 }}>Home</NavLink>
+          {location.pathname !== '/' && (
+            <NavLink to='/dashboard' style={{ color: '#4F0341', fontWeight: 800, fontSize: 18 }}>Dashboard</NavLink>
+          )}
           <NavLink to='/products' style={{ color: '#4F0341', fontWeight: 800, fontSize: 18 }}>Products</NavLink>
           <NavLink to='/sales' style={{ color: '#4F0341', fontWeight: 800, fontSize: 18 }}>Sales</NavLink>
           <NavLink to='/purchases' style={{ color: '#4F0341', fontWeight: 800, fontSize: 18 }}>Purchases</NavLink>

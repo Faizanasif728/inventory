@@ -1,4 +1,5 @@
-import { DeleteFilled, PlusOutlined } from '@ant-design/icons';
+import { ArrowLeftOutlined, DeleteFilled, PlusOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 import type { PaginationProps, TableColumnsType } from 'antd';
 import { Button, Flex, Modal, Pagination, Table } from 'antd';
 import { useState } from 'react';
@@ -53,8 +54,15 @@ const BrandManagementPage = () => {
 
   const [isCreateBrandOpen, setIsCreateBrandOpen] = useState(false);
 
+  const navigate = useNavigate();
   return (
     <>
+      <div style={{ padding: '0 clamp(0.5rem, 2vw, 1rem)', marginBottom: '.75rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <h1 style={{ color: '#4F0341', fontWeight: 900, fontSize: 'clamp(1.25rem, 4vw, 1.75rem)', letterSpacing: '.04em', textTransform: 'uppercase', margin: 0 }}>Manage Brands</h1>
+        <Button type='default' onClick={() => navigate(-1)} className='btn-go-back' style={{ borderRadius: '9999px', fontWeight: 800 }}>
+          <ArrowLeftOutlined /> Go Back
+        </Button>
+      </div>
       <Flex justify='space-between' align='center' style={{ margin: '5px' }}>
         <Button
           type='primary'

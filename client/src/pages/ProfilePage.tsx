@@ -1,9 +1,9 @@
-import { EditFilled, EditOutlined } from '@ant-design/icons';
+import { ArrowLeftOutlined, EditFilled, EditOutlined } from '@ant-design/icons';
 import { Button, Col, Flex, Row } from 'antd';
 import userProPic from '../assets/User.png';
 import Loader from '../components/Loader';
 import { useGetSelfProfileQuery } from '../redux/features/authApi';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 // Field grouping configuration
 const fieldGroups = {
@@ -27,6 +27,7 @@ const fieldGroups = {
 
 const ProfilePage = () => {
   const { data, isLoading } = useGetSelfProfileQuery(undefined);
+  const navigate = useNavigate();
 
   if (isLoading) return <Loader />;
 
@@ -35,6 +36,12 @@ const ProfilePage = () => {
   return (
     <>
       <Flex vertical style={{ gap: '2rem', paddingBottom: '2rem', padding: '0 clamp(0.5rem, 2vw, 1rem)' }}>
+        <div style={{ padding: '0 clamp(0.5rem, 2vw, 1rem)', marginBottom: '.75rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <h1 style={{ color: '#4F0341', fontWeight: 900, fontSize: 'clamp(1.25rem, 4vw, 1.75rem)', letterSpacing: '.04em', textTransform: 'uppercase', margin: 0 }}>Profile</h1>
+          <Button type='default' onClick={() => navigate(-1)} className='btn-go-back' style={{ borderRadius: '9999px', fontWeight: 800 }}>
+            <ArrowLeftOutlined /> Go Back
+          </Button>
+        </div>
         {/* Main Card Container */}
         <div style={{
           backgroundColor: '#fff',
