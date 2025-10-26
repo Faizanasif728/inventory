@@ -9,6 +9,17 @@ import purchaseRoutes from '../modules/purchase/purchase.routes';
 
 const rootRouter = Router();
 
+// Health check endpoint for API
+rootRouter.get('/health', (_req, res) => {
+  res.status(200).json({
+    success: true,
+    message: '✅ API Health Check - Backend is running successfully!',
+    status: 'Backend Server Operational',
+    apiVersion: 'v1',
+    timestamp: new Date().toISOString()
+  });
+});
+
 rootRouter.use('/users', userRoutes);
 rootRouter.use('/products', productRoute);
 rootRouter.use('/sales', saleRoutes);
