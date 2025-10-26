@@ -36,13 +36,13 @@ const EditProfilePage = () => {
     const image = e.target.files?.[0] as any;
     const formData = new FormData();
     formData.append('file', image);
-    formData.append('upload_preset', config.VITE_CLOUDINARY_UPLOAD_PRESET as string);
-    formData.append('cloud_name', config.VITE_CLOUDINARY_CLOUD_NAME as string);
+    formData.append('upload_preset', config.cloudinary.uploadPreset as string);
+    formData.append('cloud_name', config.cloudinary.cloudName as string);
     formData.append('folder', 'inventory');
 
     try {
       const response = await fetch(
-        `https://api.cloudinary.com/v1_1/${config.VITE_CLOUDINARY_CLOUD_NAME}/image/upload`,
+        `https://api.cloudinary.com/v1_1/${config.cloudinary.cloudName}/image/upload`,
         {
           method: 'POST',
           body: formData,
