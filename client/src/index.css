@@ -746,3 +746,47 @@ select.input-field option:focus,
 .ant-input-prefix {
   color: #4F0341;
 }
+
+/* Mobile responsive enhancements (CSS-only, desktop untouched) */
+@media (max-width: 768px) {
+  /* Panels and cards: maintain breathing room on small screens */
+  .panel-card { margin: .5rem; padding: .75rem; }
+
+  /* Filters stack comfortably */
+  .filter-bar { padding: .75rem; }
+  .filter-bar .ant-row { gap: 8px; }
+
+  /* Make wide tables scroll horizontally on mobile without layout shifts */
+  .ant-table-wrapper { overflow-x: auto; }
+  .ant-table { min-width: 640px; }
+
+  /* Page title spacing on mobile */
+  .page-title { margin-bottom: .5rem; }
+
+  /* Search/filter blocks expand naturally */
+  .query-filter { width: 100%; }
+
+  /* Modal body padding keeps content readable on small screens */
+  .ant-modal-body { padding: 1rem; }
+
+  /* Toolbar rows that contain a search input: stack and stretch */
+  .ant-flex:has(.ant-input-affix-wrapper) { flex-wrap: wrap !important; gap: 8px !important; }
+  .ant-flex:has(.ant-input-affix-wrapper) > * { flex: 1 1 100% !important; min-width: 0 !important; }
+  .ant-flex:has(.ant-input-affix-wrapper) .ant-input-affix-wrapper { width: 100% !important; }
+
+  /* Action button rows on small screens: full-width buttons for easier tap */
+  .ant-flex .btn-primary-purple,
+  .ant-flex .btn-cancel {
+    width: 100% !important;
+  }
+  /* Stack the action buttons vertically in small screens */
+  .ant-flex:has(.btn-primary-purple):has(.btn-cancel) {
+    flex-direction: column !important;
+    gap: .5rem !important;
+  }
+
+  /* Edit Profile form grid: collapse to single column */
+  [style*="grid-template-columns"][style*="minmax(300px"] {
+    grid-template-columns: 1fr !important;
+  }
+}

@@ -3,6 +3,7 @@ import {
   Area,
   AreaChart,
   CartesianGrid,
+  Legend,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -29,10 +30,12 @@ export default function DailyChart() {
       year: number;
       totalProfit?: number; // mapped in API layer
       totalQuantity: number;
+      totalBill?: number;
     }) => ({
       name: `${item.day} ${months[item.month - 1]}, ${item.year}`,
       profit: item.totalProfit ?? 0,
       quantity: item.totalQuantity,
+      sale: item.totalBill ?? 0,
     })
   );
 
@@ -56,12 +59,21 @@ export default function DailyChart() {
           contentStyle={{ backgroundColor: '#fff', border: '1px solid #4F0341', borderRadius: '8px' }}
           cursor={{ fill: 'rgba(79, 3, 65, 0.1)' }}
         />
+        <Legend />
         <Area 
           name='Profit' 
           type='monotone' 
           dataKey='profit' 
           stroke='#4F0341' 
           fill='rgba(79, 3, 65, 0.3)'
+          strokeWidth={2}
+        />
+        <Area 
+          name='Sale' 
+          type='monotone' 
+          dataKey='sale' 
+          stroke='#a855f7' 
+          fill='rgba(168, 85, 247, 0.2)'
           strokeWidth={2}
         />
         <Area 

@@ -5,6 +5,7 @@ import { useCountProductsQuery } from '../redux/features/management/productApi';
 import { useYearlySaleQuery } from '../redux/features/management/saleApi';
 import { useYearlyExpenseQuery, useTotalPurchasedQuantityQuery } from '../redux/features/management/purchaseApi';
 import DailyChart from '../components/Charts/DailyChart';
+import YearlyChart from '../components/Charts/YearlyChart';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 
@@ -95,6 +96,10 @@ const Dashboard = () => {
         <div className='panel-card'>
           <h1 className='panel-title'>Monthly Profit</h1>
           <MonthlyChart />
+        </div>
+        <div className='panel-card'>
+          <h1 className='panel-title'>Yearly Profit</h1>
+          <YearlyChart />
         </div>
       </>
     );

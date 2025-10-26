@@ -8,13 +8,12 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import { useMonthlySaleQuery } from '../../redux/features/management/saleApi';
-import { months } from '../../utils/generateDate';
 import { Flex } from 'antd';
 import Loader from '../Loader';
+import { useYearlySaleQuery } from '../../redux/features/management/saleApi';
 
-const MonthlyChart = () => {
-  const { data: monthlyData, isLoading } = useMonthlySaleQuery(undefined);
+const YearlyChart = () => {
+  const { data: yearlyData, isLoading } = useYearlySaleQuery(undefined);
 
   if (isLoading)
     return (
@@ -23,9 +22,9 @@ const MonthlyChart = () => {
       </Flex>
     );
 
-  const data = monthlyData?.data.map(
-    (item: { month: number; year: number; totalProfit?: number; totalQuantity: number; totalBill?: number }) => ({
-      name: `${months[item.month - 1]}, ${item.year}`,
+  const data = yearlyData?.data.map(
+    (item: { year: number; totalProfit?: number; totalQuantity: number; totalBill?: number }) => ({
+      name: `${item.year}`,
       profit: item.totalProfit ?? 0,
       quantity: item.totalQuantity,
       sale: item.totalBill ?? 0,
@@ -77,4 +76,6 @@ const MonthlyChart = () => {
   );
 };
 
-export default MonthlyChart;
+export default YearlyChart;
+
+
