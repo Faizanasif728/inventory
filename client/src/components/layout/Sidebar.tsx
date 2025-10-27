@@ -6,8 +6,8 @@ import {sidebarItems} from '../../constant/sidebarItems';
 import logo from '../../assets/inventory-logo.png';
 import userProPic from '../../assets/User.png';
 import AppFooter from './Footer';
-import {useAppDispatch} from '../../redux/hooks';
-import {logoutUser} from '../../redux/services/authSlice';
+import {useAppDispatch, useAppSelector} from '../../redux/hooks';
+import {logoutUser, getCurrentToken} from '../../redux/services/authSlice';
 import { useGetSelfProfileQuery } from '../../redux/features/authApi';
 
 const {Header, Content} = Layout;
@@ -17,7 +17,12 @@ const Sidebar = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const { data } = useGetSelfProfileQuery(undefined);
+  const token = useAppSelector(getCurrentToken);
+  
+  // Only make API call if user is authenticated
+  const { data } = useGetSelfProfileQuery(undefined, {
+    skip: !token // Skip the query if no token
+  });
 
   const handleLogout = () => {
     dispatch(logoutUser());
