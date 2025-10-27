@@ -1,4 +1,5 @@
 import httpStatus from 'http-status';
+import { Request, Response } from 'express';
 import asyncHandler from '../../lib/asyncHandler';
 import sendResponse from '../../lib/sendResponse';
 import productServices from './product.services';
@@ -9,7 +10,7 @@ class ProductControllers {
   /**
    * create new product
    */
-  create = asyncHandler(async (req, res) => {
+  create = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.services.create(req.body, req.user._id);
 
     sendResponse(res, {
@@ -23,7 +24,7 @@ class ProductControllers {
   /**
    * Add product to stock
    */
-  addStock = asyncHandler(async (req, res) => {
+  addStock = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.services.addToStock(req.params.id, req.body, req.user._id);
 
     sendResponse(res, {
@@ -37,7 +38,7 @@ class ProductControllers {
   /**
    * Get all product of user with query
    */
-  readAll = asyncHandler(async (req, res) => {
+  readAll = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.services.readAll(req.query, req.user._id);
 
     const page = Number(req.query.page) || 1;
@@ -60,7 +61,7 @@ class ProductControllers {
   /**
    * Get total product
    */
-  getTotalProduct = asyncHandler(async (req, res) => {
+  getTotalProduct = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.services.countTotalProduct(req.user._id);
 
     sendResponse(res, {
@@ -74,7 +75,7 @@ class ProductControllers {
   /**
    * Get single product of user
    */
-  readSingle = asyncHandler(async (req, res) => {
+  readSingle = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.services.read(req.params.id, req.user._id);
 
     sendResponse(res, {
@@ -88,7 +89,7 @@ class ProductControllers {
   /**
    * update product
    */
-  update = asyncHandler(async (req, res) => {
+  update = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.services.update(req.params.id, req.body);
 
     sendResponse(res, {
@@ -102,7 +103,7 @@ class ProductControllers {
   /**
    * delete product
    */
-  delete = asyncHandler(async (req, res) => {
+  delete = asyncHandler(async (req: Request, res: Response) => {
     await this.services.delete(req.params.id);
 
     sendResponse(res, {
@@ -115,7 +116,7 @@ class ProductControllers {
   /**
    * delete multiple product
    */
-  bulkDelete = asyncHandler(async (req, res) => {
+  bulkDelete = asyncHandler(async (req: Request, res: Response) => {
     await this.services.bulkDelete(req.body);
 
     sendResponse(res, {

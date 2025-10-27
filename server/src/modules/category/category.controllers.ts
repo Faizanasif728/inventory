@@ -1,4 +1,5 @@
 import httpStatus from 'http-status';
+import { Request, Response } from 'express';
 import asyncHandler from '../../lib/asyncHandler';
 import sendResponse from '../../lib/sendResponse';
 import categoryServices from './category.services';
@@ -7,7 +8,7 @@ class CategoryController {
   private services = categoryServices;
 
   // create
-  create = asyncHandler(async (req, res) => {
+  create = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.services.create(req.body, req.user._id);
 
     sendResponse(res, {
@@ -19,7 +20,7 @@ class CategoryController {
   });
 
   // read
-  getAll = asyncHandler(async (req, res) => {
+  getAll = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.services.getAll(req.query, req.user._id);
 
     const page = Number(req.query.page) || 1;
@@ -40,7 +41,7 @@ class CategoryController {
   });
 
   // update
-  update = asyncHandler(async (req, res) => {
+  update = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.services.update(req.params.id, req.body);
 
     sendResponse(res, {
@@ -52,7 +53,7 @@ class CategoryController {
   });
 
   // delete
-  delete = asyncHandler(async (req, res) => {
+  delete = asyncHandler(async (req: Request, res: Response) => {
     await this.services.delete(req.params.id);
 
     sendResponse(res, {

@@ -1,5 +1,5 @@
 import cors from 'cors';
-import express, { Application } from 'express';
+import express, { Application, Request, Response } from 'express';
 import morgan from 'morgan';
 import rootRouter from './routes';
 import notFound from './middlewares/notFound';
@@ -17,7 +17,7 @@ app.use(cors({
 }));
 
 // Root health check route
-app.get('/', (_req, res) => {
+app.get('/', (_req: Request, res: Response) => {
   // eslint-disable-next-line no-console
   console.log('[IMS][SERVER] Root / hit');
   res.status(200).json({
@@ -29,7 +29,7 @@ app.get('/', (_req, res) => {
 });
 
 // Health check endpoint
-app.get('/health', (_req, res) => {
+app.get('/health', (_req: Request, res: Response) => {
   // eslint-disable-next-line no-console
   console.log('[IMS][SERVER] /health hit');
   res.status(200).json({

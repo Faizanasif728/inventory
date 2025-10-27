@@ -1,4 +1,5 @@
 import httpStatus from 'http-status';
+import { Request, Response } from 'express';
 import asyncHandler from '../../lib/asyncHandler';
 import sendResponse from '../../lib/sendResponse';
 import purchaseServices from './purchase.services';
@@ -7,7 +8,7 @@ class PurchaseController {
   private services = purchaseServices;
 
   // create
-  create = asyncHandler(async (req, res) => {
+  create = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.services.create(req.body, req.user._id);
 
     sendResponse(res, {
@@ -19,7 +20,7 @@ class PurchaseController {
   });
 
   // read
-  getAll = asyncHandler(async (req, res) => {
+  getAll = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.services.getAll(req.user._id, req.query);
 
     const page = Number(req.query.page) || 1;
@@ -40,7 +41,7 @@ class PurchaseController {
   });
 
   // yearly expense
-  readAllYearly = asyncHandler(async (req, res) => {
+  readAllYearly = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.services.readAllYearly(req.user._id);
 
     sendResponse(res, {
@@ -52,7 +53,7 @@ class PurchaseController {
   });
 
   // total purchased quantity
-  totalQuantity = asyncHandler(async (req, res) => {
+  totalQuantity = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.services.totalPurchasedQuantity(req.user._id);
 
     sendResponse(res, {
@@ -64,7 +65,7 @@ class PurchaseController {
   });
 
   // update
-  update = asyncHandler(async (req, res) => {
+  update = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.services.update(req.params.id, req.body);
 
     sendResponse(res, {
@@ -76,7 +77,7 @@ class PurchaseController {
   });
 
   // delete
-  delete = asyncHandler(async (req, res) => {
+  delete = asyncHandler(async (req: Request, res: Response) => {
     await this.services.delete(req.params.id);
 
     sendResponse(res, {

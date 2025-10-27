@@ -10,7 +10,7 @@ class SaleControllers {
   /**
    * create new sale
    */
-  create = asyncHandler(async (req, res) => {
+  create = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.services.create(req.body, req.user._id);
 
     sendResponse(res, {
@@ -24,7 +24,7 @@ class SaleControllers {
   /**
    * Get all sale of user with query
    */
-  readAll = asyncHandler(async (req, res) => {
+  readAll = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.services.readAll(req.query, req.user._id);
 
     const page = Number(req.query.page) || 1;
@@ -47,7 +47,7 @@ class SaleControllers {
   /**
    * Get all sale by months
    */
-  readAllMonths = asyncHandler(async (req, res) => {
+  readAllMonths = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.services.readAllMonths(req.user._id);
 
     sendResponse(res, {
@@ -61,7 +61,7 @@ class SaleControllers {
   /**
    * Get all sale by daily
    */
-  readAllDaily = asyncHandler(async (req, res) => {
+  readAllDaily = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.services.readAllDaily(req.user._id);
 
     sendResponse(res, {
@@ -75,7 +75,7 @@ class SaleControllers {
   /**
    * Get all sale by yearly
    */
-  readAllYearly = asyncHandler(async (req, res) => {
+  readAllYearly = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.services.readAllYearly(req.user._id);
 
     sendResponse(res, {
@@ -89,7 +89,7 @@ class SaleControllers {
   /**
    * Get all sale by week
    */
-  readAllWeeks = asyncHandler(async (req, res) => {
+  readAllWeeks = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.services.readAllWeeks(req.user._id);
 
     sendResponse(res, {
@@ -103,7 +103,7 @@ class SaleControllers {
   /**
    * Get single sale of user
    */
-  readSingle = asyncHandler(async (req, res) => {
+  readSingle = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.services.read(req.params.id, req.user._id);
 
     sendResponse(res, {
