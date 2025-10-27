@@ -38,7 +38,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'dashboard',
+        path: '/dashboard',
         element: (
           <ProtectRoute>
             <Dashboard />
@@ -46,7 +46,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'create-product',
+        path: '/create-product',
         element: (
           <ProtectRoute>
             <CreateProduct />
@@ -54,7 +54,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'profile',
+        path: '/profile',
         element: (
           <ProtectRoute>
             <ProfilePage />
@@ -62,7 +62,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'products',
+        path: '/products',
         element: (
           <ProtectRoute>
             <ProductManagePage />
@@ -70,7 +70,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'sales',
+        path: '/sales',
         element: (
           <ProtectRoute>
             <SaleManagementPage />
@@ -78,7 +78,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'sellers',
+        path: '/sellers',
         element: (
           <ProtectRoute>
             <SellerManagementPage />
@@ -86,7 +86,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'purchases',
+        path: '/purchases',
         element: (
           <ProtectRoute>
             <PurchaseManagementPage />
@@ -94,7 +94,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'categories',
+        path: '/categories',
         element: (
           <ProtectRoute>
             <CategoryManagementPage />
@@ -102,7 +102,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'brands',
+        path: '/brands',
         element: (
           <ProtectRoute>
             <BrandManagementPage />
@@ -110,7 +110,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'about',
+        path: '/about',
         element: (
           <ProtectRoute>
             <About />
@@ -118,7 +118,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'contact',
+        path: '/contact',
         element: (
           <ProtectRoute>
             <Contact />
@@ -126,7 +126,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'support',
+        path: '/support',
         element: (
           <ProtectRoute>
             <Support />
@@ -134,7 +134,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'guideline',
+        path: '/guideline',
         element: (
           <ProtectRoute>
             <Guideline />
@@ -142,7 +142,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'sales-history',
+        path: '/sales-history',
         element: (
           <ProtectRoute>
             <SaleHistoryPage />
@@ -150,7 +150,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'edit-profile',
+        path: '/edit-profile',
         element: (
           <ProtectRoute>
             <EditProfilePage />
@@ -158,7 +158,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'change-password',
+        path: '/change-password',
         element: (
           <ProtectRoute>
             <ChangePasswordPage />
@@ -166,7 +166,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'add-loan',
+        path: '/add-loan',
         element: (
           <ProtectRoute>
             <AddLoanDetails />
@@ -174,7 +174,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'loans',
+        path: '/loans',
         element: (
           <ProtectRoute>
             <LoanManagementPage />
