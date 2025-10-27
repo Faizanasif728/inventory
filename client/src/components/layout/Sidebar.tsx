@@ -9,6 +9,7 @@ import AppFooter from './Footer';
 import {useAppDispatch, useAppSelector} from '../../redux/hooks';
 import {logoutUser, getCurrentToken} from '../../redux/services/authSlice';
 import { useGetSelfProfileQuery } from '../../redux/features/authApi';
+import { isTokenValid } from '../../utils/decodeToken';
 
 const {Header, Content} = Layout;
 
@@ -19,9 +20,9 @@ const Sidebar = () => {
   const location = useLocation();
   const token = useAppSelector(getCurrentToken);
   
-  // Only make API call if user is authenticated
+  // Only make API call if user is authenticated AND token is valid
   const { data } = useGetSelfProfileQuery(undefined, {
-    skip: !token // Skip the query if no token
+    skip: !token || !isTokenValid(token) // Skip if no token or token is expired/invalid
   });
 
   const handleLogout = () => {
