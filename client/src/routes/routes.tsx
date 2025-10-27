@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createHashRouter } from 'react-router-dom';
 import ProtectRoute from '../components/layout/ProtectRoute';
 import Sidebar from '../components/layout/Sidebar';
 import CreateProduct from '../pages/CreateProduct';
@@ -24,7 +24,7 @@ import Support from '../pages/Support';
 import Guideline from '../pages/Guideline';
 import LoanManagementPage from '../pages/LoanManagementPage';
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
   {
     path: '/',
     element: <Sidebar />,
