@@ -1,4 +1,5 @@
 import httpStatus from 'http-status';
+import { Request, Response } from 'express';
 import asyncHandler from '../../lib/asyncHandler';
 import sendResponse from '../../lib/sendResponse';
 import userServices from './user.services';
@@ -7,7 +8,7 @@ class UserControllers {
   private services = userServices;
 
   // get self profile
-  getSelf = asyncHandler(async (req, res) => {
+  getSelf = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.services.getSelf(req.user._id);
 
     sendResponse(res, {
@@ -19,7 +20,7 @@ class UserControllers {
   });
 
   // register new account
-  register = asyncHandler(async (req, res) => {
+  register = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.services.register(req.body);
 
     sendResponse(res, {
@@ -31,7 +32,7 @@ class UserControllers {
   });
 
   // login into your registered account
-  login = asyncHandler(async (req, res) => {
+  login = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.services.login(req.body);
 
     sendResponse(res, {
@@ -43,7 +44,7 @@ class UserControllers {
   });
 
   // update profile
-  updateProfile = asyncHandler(async (req, res) => {
+  updateProfile = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.services.updateProfile(req.user._id, req.body);
 
     sendResponse(res, {
@@ -55,7 +56,7 @@ class UserControllers {
   });
 
   // change Password
-  changePassword = asyncHandler(async (req, res) => {
+  changePassword = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.services.changePassword(req.user._id, req.body);
 
     sendResponse(res, {

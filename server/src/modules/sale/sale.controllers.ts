@@ -1,4 +1,5 @@
 import httpStatus from 'http-status';
+import { Request, Response } from 'express';
 import asyncHandler from '../../lib/asyncHandler';
 import sendResponse from '../../lib/sendResponse';
 import saleServices from './sale.services';
@@ -116,7 +117,7 @@ class SaleControllers {
   /**
    * update sale
    */
-  update = asyncHandler(async (req, res) => {
+  update = asyncHandler(async (req: Request, res: Response) => {
     const { price, sellingPrice, quantity, ...restPayload } = req.body;
 
     const sale = await this.services.read(req.params.id, req.user._id);
@@ -142,7 +143,7 @@ class SaleControllers {
   /**
    * delete sale
    */
-  delete = asyncHandler(async (req, res) => {
+  delete = asyncHandler(async (req: Request, res: Response) => {
     await this.services.delete(req.params.id);
 
     sendResponse(res, {

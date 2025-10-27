@@ -1,4 +1,5 @@
 import httpStatus from 'http-status';
+import { Request, Response } from 'express';
 import asyncHandler from '../../lib/asyncHandler';
 import sendResponse from '../../lib/sendResponse';
 import sellerServices from './seller.services';
@@ -9,7 +10,7 @@ class SellerControllers {
   /**
    * create new sale
    */
-  create = asyncHandler(async (req, res) => {
+  create = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.services.create(req.body, req.user._id);
 
     sendResponse(res, {
@@ -23,7 +24,7 @@ class SellerControllers {
   /**
    * Get all sale of user with query
    */
-  readAll = asyncHandler(async (req, res) => {
+  readAll = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.services.readAll(req.query, req.user._id);
 
     const page = Number(req.query.page) || 1;
@@ -46,7 +47,7 @@ class SellerControllers {
   /**
    * Get single sale of user
    */
-  readSingle = asyncHandler(async (req, res) => {
+  readSingle = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.services.read(req.params.id, req.user._id);
 
     sendResponse(res, {
@@ -60,7 +61,7 @@ class SellerControllers {
   /**
    * update sale
    */
-  update = asyncHandler(async (req, res) => {
+  update = asyncHandler(async (req: Request, res: Response) => {
     const result = await this.services.update(req.params.id, req.body);
 
     sendResponse(res, {
@@ -74,7 +75,7 @@ class SellerControllers {
   /**
    * delete sale
    */
-  delete = asyncHandler(async (req, res) => {
+  delete = asyncHandler(async (req: Request, res: Response) => {
     await this.services.delete(req.params.id);
 
     sendResponse(res, {

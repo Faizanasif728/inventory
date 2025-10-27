@@ -12,14 +12,14 @@ async function main() {
     server = app.listen(config.port, () => {
       console.log(`app is listening on port ${config.port}`);
     });
-  } catch (err) {
+  } catch (err: any) {
     console.log(err);
   }
 }
 
 main();
 
-process.on('unhandledRejection', (err) => {
+process.on('unhandledRejection', (err: any) => {
   console.log(`😈 unahandledRejection is detected , shutting down ...`, err);
   if (server) {
     server.close(() => {

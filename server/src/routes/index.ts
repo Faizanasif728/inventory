@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import userRoutes from '../modules/user/user.routes';
 import productRoute from '../modules/product/product.routes';
 import saleRoutes from '../modules/sale/sale.routes';
@@ -10,7 +10,7 @@ import purchaseRoutes from '../modules/purchase/purchase.routes';
 const rootRouter = Router();
 
 // Health check endpoint for API
-rootRouter.get('/health', (_req, res) => {
+rootRouter.get('/health', (_req: Request, res: Response) => {
   res.status(200).json({
     success: true,
     message: '✅ API Health Check - Backend is running successfully!',
