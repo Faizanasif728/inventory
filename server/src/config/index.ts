@@ -9,11 +9,10 @@ export default {
   database_url: process.env.DATABASE_URL,
   jwt_secret: process.env.JWT_SECRET,
   production_frontend_url: process.env.PRODUCTION_FRONTEND_URL,
-  local_frontend_url: process.env.LOCAL_FRONTEND_URL || 'http://localhost:5173',
+  local_frontend_url: process.env.LOCAL_FRONTEND_URL,
   cors_origin: [
     process.env.PRODUCTION_FRONTEND_URL,
-    process.env.LOCAL_FRONTEND_URL || 'http://localhost:5173',
-    'http://localhost:3000'
+    process.env.LOCAL_FRONTEND_URL
   ].filter(Boolean) as string[]
 };
 

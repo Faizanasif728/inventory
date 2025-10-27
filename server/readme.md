@@ -1,6 +1,6 @@
-# Live Site: https://mhs-inventory.netlify.app
+# Live Site: Use PRODUCTION_FRONTEND_URL environment variable
 
-## Backend Server: https://inventory-420.vercel.app
+## Backend Server: Use VITE_PRODUCTION_BACKEND_URL environment variable
 
 # Features
 
